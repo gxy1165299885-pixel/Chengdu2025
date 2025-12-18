@@ -7,7 +7,7 @@ namespace Architecture
     /// </summary>
     public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static T instance;
+        private static T _instance;
     
         /// <summary>
         /// 单例模式
@@ -16,22 +16,22 @@ namespace Architecture
         {
             get
             {
-                if(instance == null)
+                if(_instance == null)
                 {
                     GameObject obj = new GameObject(typeof(T).ToString());
-                    instance =  obj.AddComponent<T>();
+                    _instance =  obj.AddComponent<T>();
 #if DEBUG_VERSION
                 Debug.Log($"Create obj {obj.name}");
 #endif
                 }
-                return instance;
+                return _instance;
             }
         }
     
         virtual protected void Awake()
         {
-            if (instance == null) {
-                instance = GetComponent<T>();
+            if (_instance == null) {
+                _instance = GetComponent<T>();
                 DontDestroyOnLoad(this);
             }
             else

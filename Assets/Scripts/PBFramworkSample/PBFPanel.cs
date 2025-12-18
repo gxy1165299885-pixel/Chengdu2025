@@ -14,7 +14,7 @@ namespace PBFramworkSample
             base.Start();
             EventsManager.Instance.AddEventsListener<int>(Constants.Event.EVENTS_TEST, EventTest);// 事件添加和移除
         }
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             EventsManager.Instance.RemoveListener<int>(Constants.Event.EVENTS_TEST, EventTest);// 事件添加和移除
         }
