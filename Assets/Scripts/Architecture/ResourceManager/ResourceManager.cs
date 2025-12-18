@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Architecture
 {
-    public class ResManager : SingletonBase<ResManager>
+    public class ResourceManager : SingletonBase<ResourceManager>
     {
         /// <summary>
         /// 同步加载Resources下的资源

@@ -42,7 +42,7 @@ namespace Architecture
                 bgm = BGM.AddComponent<AudioSource>();
             }
             //异步加载
-            ResManager.Instance.LoadAsync<AudioClip>(path, (ac) =>
+            ResourceManager.Instance.LoadAsync<AudioClip>(path, (ac) =>
             {
                 bgm.clip = ac;
                 bgm.loop = true;
@@ -81,7 +81,7 @@ namespace Architecture
             if (!soundEnabled)
                 return;
 
-            ResManager.Instance.LoadAsync<AudioClip>(path, (ac) =>
+            ResourceManager.Instance.LoadAsync<AudioClip>(path, (ac) =>
             {
                 AudioSource source = soundObj.AddComponent<AudioSource>();
                 source.clip = ac;

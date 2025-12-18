@@ -31,7 +31,7 @@ namespace Architecture
             {
                 if (ifAsync)
                 {
-                    ResManager.Instance.LoadAsync<GameObject>(path, (loadobj) => {
+                    ResourceManager.Instance.LoadAsync<GameObject>(path, (loadobj) => {
 
                         loadobj.name = objName;
                         callback(loadobj);
@@ -39,7 +39,7 @@ namespace Architecture
                 }
                 else
                 {
-                    GameObject loadobj = ResManager.Instance.Load<GameObject>(path, parent);
+                    GameObject loadobj = ResourceManager.Instance.Load<GameObject>(path, parent);
                     loadobj.name = objName;
                     callback(loadobj);
                 }

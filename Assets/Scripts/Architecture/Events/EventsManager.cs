@@ -22,6 +22,15 @@ namespace Architecture
 
     }
 
+    public class EventInfo : IEventInfo
+    {
+        public UnityAction Actions;
+        public EventInfo(UnityAction action)
+        {
+            Actions += action;
+        }
+    }
+
     public class EventsManager : SingletonBase<EventsManager>
     {
         //存一个接口，因为里式替换原则使用时可以转化成子类，使用子类的字段，达到了可以用使用泛型存储委托的效果。
@@ -52,6 +61,31 @@ namespace Architecture
                 eventsDictionary.Add(name, new EventInfo<T>(action)); 
             }
         }
+
+        /// <summary>
+        /// 添加无参事件接受者
+        /// </summary>
+        /// <param name="name">事件名</param>
+        /// <param name="action">需要执行的事件委托</param>
+        public void AddEventsListener(string name, UnityAction action)
+        {
+            if (eventsDictionary.ContainsKey(name))
+            {
+                if (eventsDictionary[name] is EventInfo evt)
+                {
+                    evt.Actions += action;
+                }
+                else
+                {
+                    eventsDictionary[name] = new EventInfo(action);
+                    Debug.Log("添加了类型不匹配的事件Listener，" + name + "事件已经被覆盖替换");
+                }
+            }
+            else
+            {
+                eventsDictionary.Add(name, new EventInfo(action));
+            }
+        }
         /// <summary>
         /// 事件触发
         /// </summary>
@@ -65,6 +99,22 @@ namespace Architecture
                 if (eventsDictionary[name] != null && evt?.Actions != null)
                 {
                     (eventsDictionary[name] as EventInfo<T>)?.Actions.Invoke(info);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 无参事件触发
+        /// </summary>
+        /// <param name="name">事件名</param>
+        public void EventTrigger(string name)
+        {
+            if (eventsDictionary.ContainsKey(name))
+            {
+                var evt = eventsDictionary[name] as EventInfo;
+                if (eventsDictionary[name] != null && evt?.Actions != null)
+                {
+                    (eventsDictionary[name] as EventInfo)?.Actions.Invoke();
                 }
             }
         }
@@ -90,6 +140,31 @@ namespace Architecture
                 else
                 {
                     Debug.Log("尝试移除事件"+name+"的Listener类型不匹配，已静默失败");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 移除无参事件接受者
+        /// </summary>
+        /// <param name="name">事件名</param>
+        /// <param name="action">被要求执行的事件委托</param>
+        public void RemoveListener(string name, UnityAction action)
+        {
+            if (eventsDictionary.ContainsKey(name))
+            {
+                var evt = eventsDictionary[name] as EventInfo;
+                if (evt != null)
+                {
+                    evt.Actions -= action;
+                    if (evt.Actions == null)
+                    {
+                        eventsDictionary.Remove(name);
+                    }
+                }
+                else
+                {
+                    Debug.Log("尝试移除事件" + name + "的Listener类型不匹配，已静默失败");
                 }
             }
         }

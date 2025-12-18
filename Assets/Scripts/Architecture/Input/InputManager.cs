@@ -2,41 +2,44 @@
 
 namespace Architecture
 {
-    public class InputManager : SingletonBase<InputManager> 
+    public class InputManager : SingletonMono<InputManager>
     {
-        private bool allowCheck;
-        public InputManager()
+        private GameControls _controls;
+
+        public GameControls AppControls => _controls;
+
+        protected override void Awake()
         {
-            MonoController.Instance.AddUpdateListener(InputUpdate);
+            base.Awake();
+            _controls = new GameControls();
         }
 
-        public void SwitchInputCheck(bool ifcheck)
+        private void OnEnable()
         {
-            allowCheck = ifcheck;
+            _controls.Enable();
         }
 
-        void InputUpdate()
+        private void OnDisable()
         {
-            if (!allowCheck)
-                return;
-
-            //检测鼠标左键三种状态
-            if (Input.GetMouseButtonDown(0))
-                EventsManager.Instance.EventTrigger("MouseDown", 0);
-            if (Input.GetMouseButtonUp(0))
-                EventsManager.Instance.EventTrigger("MouseUp", 0);
-            if (Input.GetMouseButton(0))
-                EventsManager.Instance.EventTrigger("MousePress", 0);
-            //检测鼠标右键的三种状态
-            if (Input.GetMouseButtonDown(1))
-                EventsManager.Instance.EventTrigger("MouseDown", 1);
-            if (Input.GetMouseButtonUp(1))
-                EventsManager.Instance.EventTrigger("MouseUp", 1);
-            if (Input.GetMouseButton(1))
-                EventsManager.Instance.EventTrigger("MousePress", 1);
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-                EventsManager.Instance.EventTrigger("OnEscapeDown",0);
+            _controls.Disable();
         }
+
+        /*public Vector2 MoveInput => _controls.Player.Move.ReadValue<Vector2>();
+
+        public Vector2 LookInput => _controls.Player.Look.ReadValue<Vector2>();
+
+        public bool JumpTriggered => _controls.Player.Jump.WasPressedThisFrame();
+
+        public bool AttackTriggered => _controls.Player.Attack.WasPressedThisFrame();
+
+        public bool IsAttacking => _controls.Player.Attack.IsPressed();
+
+        public bool IsSprinting => _controls.Player.Sprint.IsPressed();
+
+        public bool InteractTriggered => _controls.Player.Interact.WasPressedThisFrame();
+
+        public bool IsCrouching => _controls.Player.Crouch.IsPressed();
+
+        public bool UICancelTriggered => _controls.UI.Cancel.WasPressedThisFrame();*/
     }
 }
