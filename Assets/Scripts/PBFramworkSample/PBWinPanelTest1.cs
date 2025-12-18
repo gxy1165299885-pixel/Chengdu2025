@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Architecture;
 
-public class PBWinPanelTest1 : BasePanel
+namespace PBFramworkSample
 {
-    protected override void OnBtnClick(string btnName)
+    public class PBWinPanelTest1 : BasePanel
     {
-        base.OnBtnClick(btnName);
-        switch(btnName)
+        protected override void OnBtnClick(string btnName)
         {
-            case "NextBtn":
-                UIManager.Instance.HidePanel(gameObject.name);
-                break;
+            base.OnBtnClick(btnName);
+            switch(btnName)
+            {
+                case "NextBtn":
+                    UIManager.Instance.HidePanel(gameObject.name);
+                    break;
+            }
         }
     }
 }

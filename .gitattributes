@@ -1,0 +1,39 @@
+# 1. 默认行为：自动处理
+# Git 会在提交时将行尾转换为 LF，检出时转换为操作系统的默认值（Windows为CRLF，Mac为LF）
+* text=auto
+
+# 2. 强制特定文件为文本格式，并使用自动行尾转换
+*.cs text
+*.txt text
+*.xml text
+*.json text
+*.shader text
+*.cginc text
+*.yaml text
+*.uss text
+*.uxml text
+
+# 3. Unity 特有文件 (YAML格式)
+# 即使在 Windows 上，通常也建议保持 Unity 的 YAML 文件处理方式一致
+*.unity text
+*.prefab text
+*.asset text
+*.meta text
+
+# 4. 强制二进制文件 (绝对不要转换行尾，否则文件会损坏！)
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
+*.pdf binary
+*.fbx binary
+*.blend binary
+*.zip binary
+*.7z binary
+*.gz binary
+*.rar binary
