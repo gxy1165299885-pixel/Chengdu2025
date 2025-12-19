@@ -21,7 +21,7 @@ namespace UI
             foodIcon.sprite = ResourceManager.Instance.Load<Sprite>(food.FoodIconName);
             foodNameText.text = food.FoodName;
             foodDescriptionText.text = food.FoodDescription;
-            foodPriceText.text = $"${food.FoodPrice:F2}";
+            foodPriceText.text = $"Total: {food.FoodPrice:F2}¥";
         }
         
         public void AddShoppingCart()

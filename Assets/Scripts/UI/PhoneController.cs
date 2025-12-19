@@ -35,7 +35,6 @@ namespace UI
                 foods.Add(new FoodItem(foodItem));
             }
             
-            // TODO 更新InShopPage的显示内容
             var inShopController = inShopPage.GetComponent<InShopController>();
             inShopController.SetShopInfo(item.GetShopIcon(),item.Name,item.ShopDescription,item.GetFoodItems());
         }

@@ -12,8 +12,13 @@ namespace Architecture
         public const string PlayerDeadEvent = "PlayerDeadEvent";
         public const string PlayerEatEvent = "PlayerEatEvent";
         
+        //刷新血条
         public const string HealthUIRefreshEvent = "UIRefreshEvent";
+        
+        //刷新购物车
         public const string CartUIRefreshEvent = "CartUIRefreshEvent";
+        
+        //商店点击进入
         public const string ShopClickedEvent = "ShopClickedEvent";
         
 

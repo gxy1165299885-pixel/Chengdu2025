@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Architecture;
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -9,6 +10,7 @@ namespace UI
     {
         [SerializeField] private RectTransform cartItemsContainer;
         [SerializeField] private FoodDisplayController cartItemPrefab;
+        [SerializeField] private TextMeshProUGUI cartTotalPrice;
 
         private void Awake()
         {
@@ -22,10 +24,15 @@ namespace UI
                 Destroy(child.gameObject);
             }
 
+            int totalPrice = 0;
+
             foreach (var item in cartItems)
             {
                 Instantiate(cartItemPrefab, cartItemsContainer).SetFoodInfo(item);
+                totalPrice += item.FoodPrice;
             }
+            
+            cartTotalPrice.text = $"Total: {totalPrice:F2}¥";
         }
     }
 }

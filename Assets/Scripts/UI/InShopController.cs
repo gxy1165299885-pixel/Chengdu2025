@@ -20,6 +20,11 @@ namespace UI
             shopNameText.text = shopName;
             shopDescriptionText.text = shopDescription;
 
+            foreach (Transform t in foodItemsContainer)
+            {
+                Destroy(t.gameObject);
+            }
+
             foreach (var food in foods)
             {
                 Instantiate(foodItemPrefab, foodItemsContainer).SetFoodInfo(food);
