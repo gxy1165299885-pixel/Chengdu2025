@@ -50,7 +50,5 @@ namespace Architecture
             if (File.Exists(path))
                 File.Delete(path);
         }
-
-
     }
 }
