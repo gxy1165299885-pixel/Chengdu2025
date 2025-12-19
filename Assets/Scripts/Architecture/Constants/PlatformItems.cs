@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Architecture;
+
 public class PlatformItems
 {
     public static List<ShopperItem> ShopperItems = new List<ShopperItem>()
@@ -239,8 +242,39 @@ public class PlatformItems
             Health = 10
         },
     };
+
+    public static void BuyFood(FoodItem food,List<DiscountItem> items)
+    {
+        var money = 0;//GameManager.Instance.
+        var spend = food.FoodPrice;
+        foreach (var item in items)
+        {
+            
+        }
+        if (money >= spend)
+        {
+            money -= spend;
+            EventsManager.Instance.EventTrigger("PlayerEatEvent",food);
+        }
+        else
+        {
+            
+        }
+    }
+    
 }
 
+public class DiscountItem
+{
+    //卷的类型
+    public DiscountType discountType;
+    //折扣值，满减时为金额，折扣时为折扣率
+    public float discountValue;
+    //起用点，只有在达到这个价格时才可以用卷
+    public float startToUse;
+    //卷是否已经膨胀过
+    public bool isBomb;
+}
 /// <summary>
 /// 商铺数据
 /// </summary>
@@ -294,12 +328,12 @@ public class FoodItem
     //食物图标名
     public string FoodIconName;
     //食物参考价格
-    public float FoodPrice;
+    public int FoodPrice;
     
     //增加饱食度
-    public float Hungry;
+    public int Hungry;
     //增加健康值
-    public float Health;
+    public int Health;
 }
 
 public static class FoodItemExtensions
@@ -333,3 +367,10 @@ public static class FoodItemExtensions
         return i.FirstOrDefault();
     }
 }
+
+[Flags]
+public enum DiscountType
+{
+    满减 = 1 << 0,
+    折扣 = 1 << 1,
+} 
