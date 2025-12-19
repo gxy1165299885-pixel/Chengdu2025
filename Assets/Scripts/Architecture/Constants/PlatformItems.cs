@@ -334,6 +334,22 @@ public class FoodItem
     public int Hungry;
     //增加健康值
     public int Health;
+    
+    public FoodItem()
+    {
+        
+    }
+
+    public FoodItem(FoodItem other)
+    {
+        FoodName = other.FoodName;
+        FoodShopName = other.FoodShopName;
+        FoodDescription = other.FoodDescription;
+        FoodIconName = other.FoodIconName;
+        FoodPrice = other.FoodPrice;
+        Hungry = other.Hungry;
+        Health = other.Health;
+    }
 }
 
 public static class FoodItemExtensions

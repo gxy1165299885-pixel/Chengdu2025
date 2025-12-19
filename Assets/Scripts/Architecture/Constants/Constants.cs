@@ -8,9 +8,13 @@ namespace Architecture
 
         public const string DayEndEvent = "DayEndEvent";
         public const string DayStartEvent = "DayStartEvent";
-
+        public const string GameEndEvent = "GameEndEvent";
         public const string PlayerDeadEvent = "PlayerDeadEvent";
         public const string PlayerEatEvent = "PlayerEatEvent";
+        
+        public const string UIRefreshEvent = "UIRefreshEvent";
+        
+        
 
         #endregion
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GamePlay;
+
 using UnityEngine;
 
 namespace Architecture
@@ -7,10 +7,20 @@ namespace Architecture
     public class GameManager : SingletonMono<GameManager>
     {
         public int dayCount = 0;
+        
         public int PlayerHungry = 15;
-        public int PlayerHealth = 100;
+        public const int MaxPlayerHungry = 15;
+        
+        public int PlayerHealth = 10;
+        public const int MaxPlayerHealth = 10;
+        
+        public int PlayerHappy = 10;
+        
         public int PlayerMoney = 10;
-        public List<ICoupon> PlayerCoupons = new List<ICoupon>();
+        
+        public List<DiscountItem> PlayerDiscountItems = new ();
+
+        public List<FoodItem> PlayerAteItems = new();
         
         public void DisplayMainScene()
         {
@@ -30,8 +40,10 @@ namespace Architecture
 
         private void OnPlayerEat(FoodItem foodItem)
         {
-            //PlayerHungry += foodItem.Hungry;
-            
+            var item = new FoodItem(foodItem);
+            PlayerHungry += item.Hungry;
+            PlayerHealth += item.Health;
+            PlayerAteItems.Add(item);
         }
 
         public void StartDay()
@@ -43,28 +55,26 @@ namespace Architecture
         public void EndDay()
         {
             EventsManager.Instance.EventTrigger(Constants.DayEndEvent, dayCount);
+
+            if (dayCount == 14)
+            {
+                EventsManager.Instance.EventTrigger(Constants.GameEndEvent);
+            }
         }
         
-        public void ChangePlayerHealth(int delta)
+        public void GetCoupon(DiscountItem coupon)
         {
-            PlayerHealth += delta;
+            PlayerDiscountItems.Add(coupon);
         }
         
-        
-        
-        public void GetCoupon(ICoupon coupon)
+        public void RemoveCoupon(DiscountItem coupon)
         {
-            PlayerCoupons.Add(coupon);
-        }
-        
-        public void RemoveCoupon(ICoupon coupon)
-        {
-            PlayerCoupons.Remove(coupon);
+            PlayerDiscountItems.Remove(coupon);
         }
         
         public void ClearCoupons()
         {
-            PlayerCoupons.Clear();
+            PlayerDiscountItems.Clear();
         }
     }
 }
