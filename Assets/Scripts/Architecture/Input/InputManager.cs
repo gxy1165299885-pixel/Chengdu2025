@@ -6,7 +6,7 @@ namespace Architecture
     {
         private GameControls _controls;
 
-        public GameControls AppControls => _controls;
+        public GameControls GameInput => _controls;
 
         protected override void Awake()
         {
