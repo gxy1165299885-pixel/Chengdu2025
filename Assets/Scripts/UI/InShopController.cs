@@ -1,0 +1,29 @@
+﻿using System.Collections.Generic;
+using Architecture;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace UI
+{
+    public class InShopController : MonoBehaviour
+    {
+        [SerializeField] private Image shopIconImage;
+        [SerializeField] private TextMeshProUGUI shopNameText;
+        [SerializeField] private TextMeshProUGUI shopDescriptionText;
+        [SerializeField] private RectTransform foodItemsContainer;
+        [SerializeField] private FoodDisplayController foodItemPrefab;
+        
+        public void SetShopInfo(Sprite shopIcon, string shopName, string shopDescription,List<FoodItem> foods)
+        {
+            shopIconImage.sprite = shopIcon;
+            shopNameText.text = shopName;
+            shopDescriptionText.text = shopDescription;
+
+            foreach (var food in foods)
+            {
+                Instantiate(foodItemPrefab, foodItemsContainer).SetFoodInfo(food);
+            }
+        }
+    }
+}

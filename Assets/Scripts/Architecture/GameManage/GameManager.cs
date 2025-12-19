@@ -18,13 +18,23 @@ namespace Architecture
         
         public int PlayerMoney = 10;
         
+        public List<FoodItem> ShoppingCartItems = new ();
+        
         public List<DiscountItem> PlayerDiscountItems = new ();
 
         public List<FoodItem> PlayerAteItems = new();
         
+        
+
+        protected override void Awake()
+        {
+            base.Awake();
+            DisplayMainScene();
+        }
+
         public void DisplayMainScene()
         {
-            
+            // TODO
         }
 
         public void StartGame()
@@ -33,17 +43,20 @@ namespace Architecture
             dayCount = 0;
             PlayerHealth = 100;
             EventsManager.Instance.EventClear();
-            EventsManager.Instance.AddEventsListener<FoodItem>(Constants.PlayerEatEvent, OnPlayerEat);
+            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
             
             StartDay();
         }
 
-        private void OnPlayerEat(FoodItem foodItem)
+        private void OnPlayerEat(List<FoodItem> foodItems)
         {
-            var item = new FoodItem(foodItem);
-            PlayerHungry += item.Hungry;
-            PlayerHealth += item.Health;
-            PlayerAteItems.Add(item);
+            foreach (var foodItem in foodItems)
+            {
+                var item = new FoodItem(foodItem);
+                PlayerHungry += item.Hungry;
+                PlayerHealth += item.Health;
+                PlayerAteItems.Add(item);
+            }
         }
 
         public void StartDay()

@@ -11,7 +11,7 @@ namespace UI
 
         private void Awake()
         {
-            EventsManager.Instance.AddEventsListener(Constants.UIRefreshEvent, () =>
+            EventsManager.Instance.AddEventsListener(Constants.HealthUIRefreshEvent, () =>
             {
                 SetHealthBar((float)GameManager.Instance.PlayerHealth/GameManager.MaxPlayerHealth);
             });

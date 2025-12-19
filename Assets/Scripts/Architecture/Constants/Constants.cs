@@ -12,8 +12,9 @@ namespace Architecture
         public const string PlayerDeadEvent = "PlayerDeadEvent";
         public const string PlayerEatEvent = "PlayerEatEvent";
         
-        public const string UIRefreshEvent = "UIRefreshEvent";
-        
+        public const string HealthUIRefreshEvent = "UIRefreshEvent";
+        public const string CartUIRefreshEvent = "CartUIRefreshEvent";
+        public const string ShopClickedEvent = "ShopClickedEvent";
         
 
         #endregion

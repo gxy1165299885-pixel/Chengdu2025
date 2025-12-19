@@ -317,7 +317,7 @@ public static class ShopperItemExtensions
 /// <summary>
 /// 外卖数据
 /// </summary>
-public class FoodItem
+public struct FoodItem
 {
     //食物的名称
     public string FoodName;
@@ -334,11 +334,6 @@ public class FoodItem
     public int Hungry;
     //增加健康值
     public int Health;
-    
-    public FoodItem()
-    {
-        
-    }
 
     public FoodItem(FoodItem other)
     {
