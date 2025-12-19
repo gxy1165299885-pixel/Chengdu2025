@@ -7,7 +7,9 @@ namespace Architecture
     public class GameManager : SingletonMono<GameManager>
     {
         public int dayCount = 0;
+        public int PlayerHungry = 15;
         public int PlayerHealth = 100;
+        public int PlayerMoney = 10;
         public List<ICoupon> PlayerCoupons = new List<ICoupon>();
         
         public void DisplayMainScene()
@@ -21,24 +23,21 @@ namespace Architecture
             dayCount = 0;
             PlayerHealth = 100;
             EventsManager.Instance.EventClear();
-            EventsManager.Instance.AddEventsListener(Constants.PlayerHealthChangedEvent,OnPlayerHealthChanged);
+            EventsManager.Instance.AddEventsListener<FoodItem>(Constants.PlayerEatEvent, OnPlayerEat);
+            
             StartDay();
+        }
+
+        private void OnPlayerEat(FoodItem foodItem)
+        {
+            //PlayerHungry += foodItem.Hungry;
+            
         }
 
         public void StartDay()
         {
             dayCount += 1;
             EventsManager.Instance.EventTrigger(Constants.DayStartEvent, dayCount);
-        }
-        
-        public void OnPlayerHealthChanged()
-        {
-            // 可以在这里处理玩家生命值变化的逻辑
-            Debug.Log("Player Health changed to: " + PlayerHealth);
-            if (PlayerHealth <= 0)
-            {
-                EventsManager.Instance.EventTrigger(Constants.PlayerDeadEvent);
-            }
         }
 
         public void EndDay()
@@ -49,8 +48,9 @@ namespace Architecture
         public void ChangePlayerHealth(int delta)
         {
             PlayerHealth += delta;
-            EventsManager.Instance.EventTrigger(Constants.PlayerHealthChangedEvent, PlayerHealth);
         }
+        
+        
         
         public void GetCoupon(ICoupon coupon)
         {
