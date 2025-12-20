@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GamePlay;
+
 using UnityEngine;
 
 namespace Architecture
@@ -7,31 +7,59 @@ namespace Architecture
     public class GameManager : SingletonMono<GameManager>
     {
         public int dayCount = 0;
-        public int PlayerHungry = 15;
-        public int PlayerHealth = 100;
-        public int PlayerMoney = 10;
-        public List<ICoupon> PlayerCoupons = new List<ICoupon>();
         
+        public int PlayerHungry = 15;
+        public const int MaxPlayerHungry = 15;
+        
+        public int PlayerHealth = 10;
+        public const int MaxPlayerHealth = 10;
+        
+        public int PlayerHappy = 10;
+        
+        public int PlayerMoney = 10;
+        
+        public List<FoodItem> ShoppingCartItems = new ();
+        
+        public List<DiscountItem> PlayerDiscountItems = new ();
+
+        public List<FoodItem> PlayerAteItems = new();
+        
+        
+
+        protected override void Awake()
+        {
+            base.Awake();
+            DisplayMainScene();
+        }
+
         public void DisplayMainScene()
         {
-            
+            // TODO
         }
 
         public void StartGame()
         {
             //开始游戏时会+1天
             dayCount = 0;
-            PlayerHealth = 100;
-            EventsManager.Instance.EventClear();
-            EventsManager.Instance.AddEventsListener<FoodItem>(Constants.PlayerEatEvent, OnPlayerEat);
+            PlayerHealth = MaxPlayerHealth;
+            PlayerHungry = MaxPlayerHungry;
+            PlayerHappy = 0;
+            PlayerMoney = 200;
+ 
+            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
             
             StartDay();
         }
 
-        private void OnPlayerEat(FoodItem foodItem)
+        private void OnPlayerEat(List<FoodItem> foodItems)
         {
-            //PlayerHungry += foodItem.Hungry;
-            
+            foreach (var foodItem in foodItems)
+            {
+                var item = new FoodItem(foodItem);
+                PlayerHungry += item.Hungry;
+                PlayerHealth += item.Health;
+                PlayerAteItems.Add(item);
+            }
         }
 
         public void StartDay()
@@ -43,28 +71,28 @@ namespace Architecture
         public void EndDay()
         {
             EventsManager.Instance.EventTrigger(Constants.DayEndEvent, dayCount);
+
+            if (dayCount == 14)
+            {
+                EventsManager.Instance.EventTrigger(Constants.GameEndEvent);
+            }
         }
         
-        public void ChangePlayerHealth(int delta)
+        public void GetCoupon(DiscountItem coupon)
         {
-            PlayerHealth += delta;
+            PlayerDiscountItems.Add(coupon);
         }
         
-        
-        
-        public void GetCoupon(ICoupon coupon)
+        public void RemoveCoupon(DiscountItem coupon)
         {
-            PlayerCoupons.Add(coupon);
-        }
-        
-        public void RemoveCoupon(ICoupon coupon)
-        {
-            PlayerCoupons.Remove(coupon);
+            PlayerDiscountItems.Remove(coupon);
         }
         
         public void ClearCoupons()
         {
-            PlayerCoupons.Clear();
+            PlayerDiscountItems.Clear();
         }
+        
+        //public void Start
     }
 }
