@@ -21,18 +21,19 @@ public class TapSDKData : SingletonBase<TapSDKData>
         enableLog = true
     };
 
-    public TapSDKData()
-    {
+    public void Initialize()
+    {Debug.Log("Tap SDK initialized");
         TapTapSDK.Init(coreOptions);
+        
         var IsSuccess =  TapTapSDK.IsLaunchedFromTapTapPC();
         if (IsSuccess.Result)
         {
-            UnityEngine.Debug.Log(" TapTap PC 端校验通过");
+            Debug.Log(" TapTap PC 端校验通过");
             // TODO: 继续后续登录等其他业务流程
         }
         else
         {
-            UnityEngine.Debug.Log(" TapTap PC 端校验未通过");
+            Debug.Log(" TapTap PC 端校验未通过");
             // 停止执行后续业务流程
         }
     }
