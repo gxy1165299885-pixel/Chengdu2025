@@ -267,11 +267,16 @@ public class PlatformItems
         {
             send = 10;
         }
-        foreach (var foodItem in food)
+
+        if (food != null&&food.Count>0)
         {
-            spend = foodItem.FoodPrice;
+            foreach (var foodItem in food)
+            {
+                spend += foodItem.FoodPrice;
+            }
         }
-        if (items != null)
+        
+        if (items != null&&food != null&&food.Count>0)
         {
             foreach (var item in items)
             {
