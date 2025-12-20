@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class FreeCouponButton : MonoBehaviour,IPointerDownHandler
+    public class FreeCouponButton : MonoBehaviour,IPointerClickHandler
     {
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             Debug.Log("免费优惠券按钮被点击");
             EventsManager.Instance.EventTrigger(Constants.FreeCouponEvent);
