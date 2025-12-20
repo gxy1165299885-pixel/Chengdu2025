@@ -73,7 +73,7 @@ public class InitDiscount : MonoBehaviour
         //
         if (info.discountType == DiscountType.shier)
         {
-            ShowDialog.Instance.ShowDialogInfo("本次你必须使用此外卖卷。");
+            ShowDialog.Instance.ShowDialogInfo("必须使用此外卖卷。");
             return;
         }
         GameManager.Instance.PlayerDiscountItems.Add(info);
