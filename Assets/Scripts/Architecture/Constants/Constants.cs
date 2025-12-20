@@ -30,6 +30,11 @@ namespace Architecture
         //展示加入购物车的提示
         public const string ShowAddToCartTipEvent = "ShowAddToCartTipEvent";
         
+        //天降神券
+        public const string FreeCouponEvent = "FreeCouponEvent";
+        
+        
+        
 
         #endregion
 

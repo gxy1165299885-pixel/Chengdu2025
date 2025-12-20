@@ -15,15 +15,34 @@ namespace UI
         [SerializeField] private GameObject payPage;
         [SerializeField] private GameObject superCouponPage;
         [SerializeField] private GameObject myPage;
+        
+        [SerializeField] private GameObject freeCouponPagePrefab;
 
         private void OnEnable()
         {
             EventsManager.Instance.AddEventsListener<ShopperItem>(Constants.ShopClickedEvent, OpenInShopPage);
+            EventsManager.Instance.AddEventsListener(Constants.FreeCouponEvent, ShowFreeCouponPage);
         }
         
         private void OnDisable()
         {
             EventsManager.Instance.RemoveListener<ShopperItem>(Constants.ShopClickedEvent, OpenInShopPage);
+            EventsManager.Instance.RemoveListener(Constants.FreeCouponEvent, ShowFreeCouponPage);
+        }
+        
+        private void ShowFreeCouponPage()
+        {
+            Debug.Log("尝试显示免费优惠券页面");
+            if (GameManager.Instance.haveFreeCouponThisDay)
+            {
+                GameManager.Instance.haveFreeCouponThisDay = false;
+                Instantiate(freeCouponPagePrefab, transform);
+            }
+            else
+            {
+                Debug.Log("今天已经领取过免费优惠券了");
+                ShowDialog.Instance.ShowDialogInfo("今天已经领取过免费优惠券了");
+            }
         }
 
         public void OpenInShopPage(ShopperItem item)

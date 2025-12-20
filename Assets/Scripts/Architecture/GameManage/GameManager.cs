@@ -12,6 +12,8 @@ namespace Architecture
         
         public int dayCount = 0;
         
+        public bool haveFreeCouponThisDay = false;
+        
         private int _hungryToDeath = 0;
         public int HungryToDeath
         {
@@ -19,6 +21,7 @@ namespace Architecture
             set
             {
                 _hungryToDeath = value;
+                Debug.Log("饥饿过度计数: " + _hungryToDeath);
                 if (_hungryToDeath >= 3)
                 {
                     Debug.Log("玩家因饥饿过度死亡");
@@ -46,7 +49,6 @@ namespace Architecture
                     _playerHungry = 0;
                     _isDying = true;
                 }
-                Debug.Log("玩家饥饿值变更为: " + _playerHungry);
                 EventsManager.Instance.EventTrigger(Constants.HungryUIRefreshEvent);
             }
         }
@@ -93,12 +95,8 @@ namespace Architecture
 
         public List<FoodItem> ShoppingCartItems = new ();
         
-        public List<DiscountItem> PlayerDiscountItems = new()
-        {
-            new DiscountItem(),
-            new DiscountItem()
-        };
-        public List<DiscountItem> UsingDiscountItems = new ();
+        public List<DiscountItem> PlayerDiscountItems = new();
+        public List<DiscountItem> UsingDiscountItems = new();
 
         public List<FoodItem> PlayerAteItems = new();
         
@@ -146,6 +144,7 @@ namespace Architecture
         {
             dayCount += 1;
             EventsManager.Instance.EventTrigger<int>(Constants.DayStartEvent, dayCount);
+            haveFreeCouponThisDay = true;
         }
 
         public void EndDay()
