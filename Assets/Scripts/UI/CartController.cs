@@ -23,20 +23,15 @@ namespace UI
         {
             _canvasGroup = GetComponent<CanvasGroup>();
             Assert.IsNotNull(_canvasGroup);
+            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
         }
 
         private void OnEnable()
         {
-            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
             RefreshCartItems(GameManager.Instance.ShoppingCartItems);
-        }
-
-        private void OnDisable()
-        {
-            EventsManager.Instance.RemoveListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
         }
 
         /// <summary>
