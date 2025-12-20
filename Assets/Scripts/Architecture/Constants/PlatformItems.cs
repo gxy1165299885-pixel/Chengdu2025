@@ -972,8 +972,8 @@ public class PlatformItems
                     case DiscountType.sub: spend -= (item.discountValue+extra);break;
                     case DiscountType.change: food[Random.Range(0,food.Count)] = FoodItems[Random.Range(0, FoodItems.Count - 1)]; break;
                     case DiscountType.free: spend -= food[Random.Range(0,food.Count)].FoodPrice;break;
-                    case DiscountType.Jiahao:spend = (int)(spend*Random.Range(0.8f, 1.2f)); break;
-                    case DiscountType.shier: spend = (int)(spend*1.2f); break;
+                    case DiscountType.Jiahao:spend = (int)(Mathf.Ceil(spend*Random.Range(0.8f, 1.2f))); break;
+                    case DiscountType.shier: spend = (int)(Mathf.Ceil(spend*1.2f)); break;
                 }
             }
         }
