@@ -275,7 +275,7 @@ public class PlatformItems
                 spend += foodItem.FoodPrice;
             }
         }
-        
+        Discounts = 0;
         if (items != null&&food != null&&food.Count>0)
         {
             foreach (var item in items)
@@ -284,6 +284,7 @@ public class PlatformItems
                 {
                     continue;
                 }
+                Discounts++;
                 switch (item.discountType)
                 {
                     case DiscountType.sub: spend -= (item.discountValue+extra);break;
@@ -296,20 +297,27 @@ public class PlatformItems
         }
         spend = Mathf.Max(0, spend);
         spend += send;
+        BuyFoods = new List<FoodItem>();
+        spendd = 0;
         if (money >= spend)
         {
             money -= spend;
             GameManager.Instance.PlayerMoney = money;
             EventsManager.Instance.EventTrigger("PlayerEatEvent",food);
             //Buyed.Add(food);
+            BuyFoods = food;
+            spendd = spend;
             return spend;
         }
         else
         {
+            Discounts = 0;
             return -1;
         }
     }
-    
+    public static List<FoodItem> BuyFoods = new List<FoodItem>();
+    public static int Discounts = 0;
+    public static int spendd = 0;
 }
 
 public class DiscountItem//:ICoupon
