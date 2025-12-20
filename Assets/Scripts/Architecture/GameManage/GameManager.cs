@@ -13,6 +13,8 @@ namespace Architecture
         public int dayCount = 0;
         
         public bool haveFreeCouponThisDay = false;
+        public bool haveExchangeTimeThisDay = false;
+        public int gachaTimesThisDay = 0;
         
         private int _hungryToDeath = 0;
         public int HungryToDeath
@@ -145,6 +147,8 @@ namespace Architecture
             dayCount += 1;
             EventsManager.Instance.EventTrigger<int>(Constants.DayStartEvent, dayCount);
             haveFreeCouponThisDay = true;
+            haveExchangeTimeThisDay = true;
+            gachaTimesThisDay = 0;
         }
 
         public void EndDay()

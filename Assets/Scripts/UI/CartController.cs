@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Architecture;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace UI
 {
@@ -21,6 +22,7 @@ namespace UI
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+            Assert.IsNotNull(_canvasGroup);
         }
 
         private void OnEnable()
@@ -60,6 +62,7 @@ namespace UI
         
         public void ShowCart()
         {
+            gameObject.SetActive(true);
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
@@ -70,6 +73,7 @@ namespace UI
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            gameObject.SetActive(false);
         }
     }
 }
