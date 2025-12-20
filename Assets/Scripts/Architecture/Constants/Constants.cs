@@ -12,6 +12,9 @@ namespace Architecture
         public const string PlayerDeadEvent = "PlayerDeadEvent";
         public const string PlayerEatEvent = "PlayerEatEvent";
         
+        //天数变化
+        public const string DayChangedEvent = "DayChangedEvent";
+        
         //刷新血条
         public const string HealthUIRefreshEvent = "UIRefreshEvent";
         

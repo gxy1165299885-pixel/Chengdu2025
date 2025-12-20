@@ -22,7 +22,7 @@ namespace UI
         public void SetShopDisplay(Sprite shopIcon, string theName,ShopperItem shopRef)
         
         {
-            Random.InitState(GameManager.Instance.dayCount+ theName.GetHashCode()); // 使用天数和店名的哈希值作为随机种子
+            Random.InitState(GameManager.Instance.DayCount+ theName.GetHashCode()); // 使用天数和店名的哈希值作为随机种子
             int rating = Random.Range(3,6); // 生成3到5的随机评分
             Random.InitState((int)System.DateTime.Now.Ticks); // 恢复随机种子
             icon.sprite = shopIcon;

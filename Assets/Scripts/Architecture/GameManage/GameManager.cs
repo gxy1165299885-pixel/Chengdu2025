@@ -10,7 +10,17 @@ namespace Architecture
     {
         [SerializeField] private Canvas mainGameCanvas;
         
-        public int dayCount = 0;
+        private int _dayCount = 0;
+
+        public int DayCount
+        {
+            get { return _dayCount; }
+            set
+            {
+                _dayCount = value;
+                EventsManager.Instance.EventTrigger(Constants.DayChangedEvent);
+            }
+        }
         
         public bool haveFreeCouponThisDay = false;
         public bool haveExchangeTimeThisDay = false;
@@ -114,7 +124,7 @@ namespace Architecture
         public void StartGame()
         {
             //开始游戏时会+1天
-            dayCount = 0;
+            DayCount = 0;
             PlayerHealth = MaxPlayerHealth;
             PlayerHungry = MaxPlayerHungry;
             PlayerHappy = 0;
@@ -158,8 +168,8 @@ namespace Architecture
 
         public void StartDay()
         {
-            dayCount += 1;
-            EventsManager.Instance.EventTrigger<int>(Constants.DayStartEvent, dayCount);
+            DayCount += 1;
+            EventsManager.Instance.EventTrigger<int>(Constants.DayStartEvent, DayCount);
             haveFreeCouponThisDay = true;
             haveExchangeTimeThisDay = true;
             gachaTimesThisDay = 0;
@@ -183,9 +193,9 @@ namespace Architecture
             PlatformItems.ShowTicket();
             Instance.PlayerHungry -= 10;
             
-            EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, dayCount);
+            EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, DayCount);
 
-            if (dayCount == 14)
+            if (DayCount == 14)
             {
                 EventsManager.Instance.EventTrigger(Constants.GameEndEvent);
             }
