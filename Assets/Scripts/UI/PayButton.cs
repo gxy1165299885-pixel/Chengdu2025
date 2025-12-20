@@ -26,7 +26,8 @@ namespace UI
                     EverydayEvent.ShowEvent();
                     return;
                 }
-                GameManager.Instance.EndDay();
+                PlatformItems.ShowTicket();
+                //GameManager.Instance.EndDay();
             }
         }
     }
