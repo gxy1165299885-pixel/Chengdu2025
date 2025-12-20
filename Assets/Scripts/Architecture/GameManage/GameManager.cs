@@ -176,6 +176,8 @@ namespace Architecture
 
             todayFighting = false;
             todayStolen = false;
+            
+            //获得今日事件
             var today = EverydayEvent.GetEverydayEvent();
             if (today == DailyEvent.Fighting)
             {
@@ -190,7 +192,6 @@ namespace Architecture
 
         public void EndDay()
         {
-            PlatformItems.ShowTicket();
             Instance.PlayerHungry -= 10;
             
             EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, DayCount);
@@ -212,21 +213,6 @@ namespace Architecture
             
             // 去下一天
             StartDay();
-        }
-        
-        public void GetCoupon(DiscountItem coupon)
-        {
-            PlayerDiscountItems.Add(coupon);
-        }
-        
-        public void RemoveCoupon(DiscountItem coupon)
-        {
-            PlayerDiscountItems.Remove(coupon);
-        }
-        
-        public void ClearCoupons()
-        {
-            PlayerDiscountItems.Clear();
         }
         
         private void OnEnable()
