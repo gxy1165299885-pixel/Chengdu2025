@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// 控制手机页面切换
+    /// </summary>
     public class PhoneController : MonoBehaviour
     {
         [SerializeField] private GameObject inShopPage;

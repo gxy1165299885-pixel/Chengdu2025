@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// 玩家角色的状态显示
+    /// </summary>
     public class PlayerDisplayController : MonoBehaviour
     {
         [SerializeField] private Image healthBar;

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// 进入外卖店，负责显示店铺信息及店内菜品
+    /// </summary>
     public class InShopController : MonoBehaviour
     {
         [SerializeField] private Image shopIconImage;
