@@ -19,5 +19,14 @@ namespace UI
             discountDescriptionText.text = discountItem.GetDescription();
             discountExpiryText.text = $"有效期至: 第{discountItem.expireTime}天";
         }
+        
+        public void HideUseButton()
+        {
+            var btn = transform.Find("使用神券按钮")?.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.gameObject.SetActive(false);
+            }
+        }
     }
 }
