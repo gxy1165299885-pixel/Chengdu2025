@@ -14,7 +14,7 @@ namespace UI
         public void OnStartButtonClicked()
         {
             startMenuCanvas.gameObject.SetActive(false);
-            GameManager.Instance.DisplayMainScene();
+            GameManager.DisplayMainScene();
         }
     }
 }

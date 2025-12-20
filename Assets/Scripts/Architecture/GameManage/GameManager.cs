@@ -97,7 +97,7 @@ namespace Architecture
         
         public int PlayerHappy = 10;
         
-        private int _playerMoney = 240;
+        private int _playerMoney = 200;
         public int PlayerMoney {
             get => _playerMoney;
             set
@@ -115,7 +115,7 @@ namespace Architecture
 
         public List<FoodItem> PlayerAteItems = new();
         
-        public void DisplayMainScene()
+        public static void DisplayMainScene()
         {
             GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);
             GameManager.Instance.StartGame();
@@ -129,6 +129,19 @@ namespace Architecture
             PlayerHungry = MaxPlayerHungry;
             PlayerHappy = 0;
             PlayerMoney = 200;
+            ShoppingCartItems.Clear();
+            PlayerDiscountItems.Clear();
+            UsingDiscountItems.Clear();
+            PlayerAteItems.Clear();
+
+            _isDying = false;
+            _hungryToDeath = 0;
+
+            haveFreeCouponThisDay = true;
+            haveExchangeTimeThisDay = true;
+            gachaTimesThisDay = 0;
+            todayFighting = false;
+            todayStolen = false;
             
             StartDay();
         }
