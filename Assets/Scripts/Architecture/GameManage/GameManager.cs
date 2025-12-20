@@ -9,7 +9,6 @@ namespace Architecture
     public class GameManager : SingletonMono<GameManager>
     {
         [SerializeField] private Canvas mainGameCanvas;
-        [SerializeField] private GameObject Story;
         
         public int dayCount = 0;
         
@@ -37,7 +36,6 @@ namespace Architecture
         [YarnCommand("DisplayMainScene")]
         public static void DisplayMainScene()
         {
-            GameManager.Instance.Story.SetActive(false);
             GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);
             GameManager.Instance.StartGame();
         }
@@ -98,10 +96,7 @@ namespace Architecture
 
         public void StartStory(string nodeName)
         {
-            mainGameCanvas.gameObject.SetActive(false);
-            Story.SetActive(true);
-            var storyController = Story.GetComponent<StoryController>();
-            storyController.StartStory(nodeName);
+            
         }
         
         private void OnEnable()
