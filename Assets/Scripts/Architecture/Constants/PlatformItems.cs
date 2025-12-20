@@ -274,6 +274,7 @@ public class PlatformItems
                     case DiscountType.change: food[Random.Range(0,food.Count)] = FoodItems[Random.Range(0, FoodItems.Count - 1)]; break;
                     case DiscountType.free: spend -= food[Random.Range(0,food.Count)].FoodPrice;break;
                     case DiscountType.Jiahao:spend = (int)(spend*Random.Range(0.8f, 1.2f)); break;
+                    case DiscountType.shier: spend = (int)(spend*1.2f); break;
                 }
             }
         }
@@ -453,4 +454,5 @@ public enum DiscountType
     change = 1 << 2,//换餐卷
     free = 1 << 3,//免单卷
     Jiahao = 1 << 4,//嘉豪卷，随机修改花费值
+    shier = 1 << 5,//十二折卷
 } 

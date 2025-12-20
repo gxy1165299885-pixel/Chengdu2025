@@ -69,6 +69,11 @@ public class InitDiscount : MonoBehaviour
     
     public void OnReturn(DiscountItem info)
     {
+        //
+        if (info.discountType == DiscountType.shier)
+        {
+            
+        }
         GameManager.Instance.PlayerDiscountItems.Add(info);
         GameManager.Instance.UsingDiscountItems.Remove(info);
         UpdateDiscount();
