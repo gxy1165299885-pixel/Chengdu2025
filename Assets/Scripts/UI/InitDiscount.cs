@@ -33,6 +33,7 @@ public class InitDiscount : MonoBehaviour
             var o = GameManager.Instance.PlayerDiscountItems[i];
             //obj.GetComponent<DiscountDisplay>().SetDiscountInfo(ref o);
             var btn = obj.transform.Find("使用神券按钮").GetComponent<Button>();
+            btn.gameObject.SetActive(true);
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(()=>OnUse(o));
         }
@@ -72,7 +73,8 @@ public class InitDiscount : MonoBehaviour
         //
         if (info.discountType == DiscountType.shier)
         {
-            
+            ShowDialog.Instance.ShowDialogInfo("本次你必须使用此外卖卷。");
+            return;
         }
         GameManager.Instance.PlayerDiscountItems.Add(info);
         GameManager.Instance.UsingDiscountItems.Remove(info);

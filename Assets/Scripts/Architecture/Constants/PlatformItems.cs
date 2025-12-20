@@ -298,7 +298,7 @@ public class PlatformItems
 public class DiscountItem//:ICoupon
 {
     //卷的类型
-    public DiscountType discountType = DiscountType.sub;
+    public DiscountType discountType = DiscountType.shier;
     //折扣值，满减时为金额，折扣时为折扣率
     public int discountValue = 10;
     //起用点，只有在达到这个价格时才可以用卷
