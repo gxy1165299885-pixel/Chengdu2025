@@ -1,5 +1,6 @@
 using Architecture;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum DailyEvent
 {
@@ -45,6 +46,16 @@ public class EverydayEvent
         if (day == DailyEvent.None)
         {
             return;
+        }
+
+        var ui = Resources.Load<GameObject>("Prefab/SpecialEvent");
+        
+        var phone = GameObject.Find("手机画面");
+        if (phone != null)
+        {
+            ui = Object.Instantiate(ui, phone.transform);
+            var img = ui.GetComponent<Image>();
+            img.sprite = Resources.Load<Sprite>($"SpecialEvent/{day.ToString()}");
         }
         Debug.Log(day);
     }
