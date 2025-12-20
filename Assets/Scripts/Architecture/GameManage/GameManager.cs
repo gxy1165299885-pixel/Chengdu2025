@@ -153,6 +153,7 @@ namespace Architecture
 
         public void EndDay()
         {
+            PlatformItems.ShowTicket();
             Instance.PlayerHungry -= 10;
             
             EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, dayCount);

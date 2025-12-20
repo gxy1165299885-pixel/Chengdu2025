@@ -2807,6 +2807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491932552}
   - component: {fileID: 491932553}
+  - component: {fileID: 491932554}
   m_Layer: 5
   m_Name: "\u70B9\u5355-\u7ED3\u7B97\u9875\u9762"
   m_TagString: Untagged
@@ -2852,6 +2853,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItemsContainer: {fileID: 1125284425}
   foodItemPrefab: {fileID: 2614880931333036575, guid: 5becb478d3422aa43a7b79062991fd42, type: 3}
+--- !u!114 &491932554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491932551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d001aa2edee94dfb9f96e0ffdc02a643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoText: {fileID: 109079304}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

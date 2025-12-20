@@ -18,7 +18,6 @@ namespace UI
             }
             else
             {
-                GameManager.Instance.ShoppingCartItems.Clear();
                 GameManager.Instance.EndDay();
             }
         }

@@ -321,8 +321,8 @@ public class PlatformItems
 
     public static void ShowTicket()
     {
-        var ticket = Resources.Load<GameObject>("Prefabs/小票结算");
-        var phone = GameObject.Find("手机界面");
+        var ticket = Resources.Load<GameObject>("Prefab/小票结算");
+        var phone = GameObject.Find("手机画面");
         if (phone != null)
         {
             UnityEngine.Object.Instantiate(ticket,phone.transform);
