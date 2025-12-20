@@ -15,7 +15,7 @@ namespace Architecture.Dialogue
     {
         [SerializeField] private TextMeshProUGUI dialogueText;
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         
         string[] NormalTalk =
         {
@@ -63,7 +63,6 @@ namespace Architecture.Dialogue
             "抢到了超市的临期打折面包，感觉自己是华尔街之狼。",
             "不用早起的一天，而且还领到了免配送费券，空气都是甜的。",
             "居然没挂科！感谢老师不杀之恩！为了庆祝，我要加个蛋！",
-            "发生活费了！虽然还完花呗就没了，但至少曾经拥有过那串数字。",
             "买到了半价的奶茶，四舍五入等于不要钱！我赚了！",
             "感觉今天运气爆棚，是不是该去买张彩票？算了，两块钱也是钱。",
             "刚刚那只流浪猫让我摸了！它是不是闻到了我身上的肉包子味？",
@@ -81,7 +80,6 @@ namespace Architecture.Dialogue
             "药好贵啊，这吃的不是药，是我的血汗钱，是我的鸡腿饭！",
             "我想回家，我想喝妈妈煮的粥...外卖的粥全是水。",
             "咳得肺都要出来了，有没有人能帮我塞回去？顺便帮我领个药店优惠券。",
-            "以后再也不熬夜抢券了...大概吧，除非是大额券。",
             "感觉自己像个废人，连下床拿外卖都需要勇气。",
             "这就是不穿秋裤的报应吗？还是因为没钱买羽绒服？",
             "体温计上的数字比我的绩点还高，也比我的余额高。",
@@ -93,26 +91,24 @@ namespace Architecture.Dialogue
             "只要让我好起来，我愿意吃一周的素！反正肉也吃不起！",
         };
 
-        private void OnEnable()
+        protected override void Awake()
         {
+            base.Awake();
             EventsManager.Instance.AddEventsListener<int>(Constants.DayStartEvent, OnDayStart);   
             EventsManager.Instance.AddEventsListener<int>(Constants.DayEndEvent, OnDayEnd);
-        }
-        
-        private void OnDisable()
-        {
-            EventsManager.Instance.RemoveListener<int>(Constants.DayStartEvent, OnDayStart);   
-            EventsManager.Instance.RemoveListener<int>(Constants.DayEndEvent, OnDayEnd);
         }
 
         private void OnDayStart(int day)
         {
-            
+            _cancellationTokenSource = new CancellationTokenSource();
+            StartDialogue();
         }
         
         private void OnDayEnd(int day)
         {
-            
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            dialogueText.text = string.Empty;
         }
 
         private async void StartDialogue()
@@ -134,11 +130,26 @@ namespace Architecture.Dialogue
         }
         private string GetRandomDialogue()
         {
-            
-            
-            // TODO 根据游戏进度添加更多对话类型
-            int index = Random.Range(0, NormalTalk.Length);
-            return NormalTalk[index];
+            if (GameManager.Instance.PlayerHungry<=3 || GameManager.Instance.HungryToDeath > 0)
+            {
+                int index = Random.Range(0, HungryTalk.Length);
+                return HungryTalk[index];
+            }
+            else if (GameManager.Instance.PlayerHealth < GameManager.MaxPlayerHealth * 0.3f)
+            {
+                int index = Random.Range(0, IllTalk.Length);
+                return IllTalk[index];
+            }
+            else if (GameManager.Instance.PlayerHappy > 100)
+            {
+                int index = Random.Range(0, HappyTalk.Length);
+                return HappyTalk[index];
+            }
+            else
+            {
+                int index = Random.Range(0, NormalTalk.Length);
+                return NormalTalk[index];
+            }
         }
     }
 }
