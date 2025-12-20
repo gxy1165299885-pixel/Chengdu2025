@@ -256,11 +256,27 @@ public class PlatformItems
     {
         var money = GameManager.Instance.PlayerMoney;
         var spend = 0;
-        foreach (var foodItem in food)
+        var extra = 0;
+        var send = 0;
+        if (EverydayEvent.day == DailyEvent.Platform)
         {
-            spend += foodItem.FoodPrice;
+            extra = 5;
         }
-        if (items != null)
+
+        if (EverydayEvent.day == DailyEvent.SleepLate)
+        {
+            send = 10;
+        }
+
+        if (food != null&&food.Count>0)
+        {
+            foreach (var foodItem in food)
+            {
+                spend += foodItem.FoodPrice;
+            }
+        }
+        
+        if (items != null&&food != null&&food.Count>0)
         {
             foreach (var item in items)
             {
@@ -270,7 +286,7 @@ public class PlatformItems
                 }
                 switch (item.discountType)
                 {
-                    case DiscountType.sub: spend -= item.discountValue;break;
+                    case DiscountType.sub: spend -= (item.discountValue+extra);break;
                     case DiscountType.change: food[Random.Range(0,food.Count)] = FoodItems[Random.Range(0, FoodItems.Count - 1)]; break;
                     case DiscountType.free: spend -= food[Random.Range(0,food.Count)].FoodPrice;break;
                     case DiscountType.Jiahao:spend = (int)(spend*Random.Range(0.8f, 1.2f)); break;
@@ -279,6 +295,7 @@ public class PlatformItems
             }
         }
         spend = Mathf.Max(0, spend);
+        spend += send;
         if (money >= spend)
         {
             money -= spend;
@@ -298,11 +315,11 @@ public class PlatformItems
 public class DiscountItem//:ICoupon
 {
     //卷的类型
-    public DiscountType discountType = DiscountType.shier;
+    public DiscountType discountType = DiscountType.sub;
     //折扣值，满减时为金额，折扣时为折扣率
-    public int discountValue = 10;
+    public int discountValue = 0;
     //起用点，只有在达到这个价格时才可以用卷
-    public int startToUse = 20;
+    public int startToUse = 0;
     //卷是否已经膨胀过
     public bool isBomb = false;
     //卷的过期时间
@@ -340,29 +357,29 @@ public static class DiscountItemExtensions
         {
             if (discountItem.startToUse > 0)
             {
-                return $"满{discountItem.startToUse}\n减{discountItem.discountValue}卷";
+                return $"满{discountItem.startToUse}\n减{discountItem.discountValue}券";
             }
             else
             {
-                return $"立减\n{discountItem.discountValue}元卷";
+                return $"立减\n{discountItem.discountValue}元券";
             }
             
         }
         else if(discountItem.discountType == DiscountType.change)
         {
-            return "换餐卷";
+            return "换餐券";
         }
         else if(discountItem.discountType == DiscountType.free)
         {
-            return "免单卷";
+            return "免单券";
         }
         else if(discountItem.discountType == DiscountType.Jiahao)
         {
-            return "嘉豪卷";
+            return "嘉豪券";
         }
         else if(discountItem.discountType == DiscountType.shier)
         {
-            return "十二折卷";
+            return "十二折券";
         }
         else
         {

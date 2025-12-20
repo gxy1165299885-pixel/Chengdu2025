@@ -42,7 +42,7 @@ public class FreshNewDiscount : MonoBehaviour
     {
         List<DiscountItem> list = new List<DiscountItem>();
         var ix = Random.Range(0, 1f);
-        if (ix < 1f)
+        if (ix < 0.3f)
         {
             var special = Random.Range(2, 6);
             var newItem = new DiscountItem
