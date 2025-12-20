@@ -10,11 +10,12 @@ namespace UI
     {
         [SerializeField] private GameObject payDiscountPage;
         [SerializeField] private Transform discountItemsContainer;
-        [SerializeField] private CouponController couponPrefab;
+        [SerializeField] private DiscountDisplay couponPrefab;
         public List<DiscountItem> useDiscountItems;
 
         private void OnEnable()
         {
+            useDiscountItems.Clear();
             EventsManager.Instance.AddEventsListener<DiscountItem>(Constants.CouponUseClickedEvent, AddUseDiscount);
         }
 
@@ -37,9 +38,10 @@ namespace UI
                 Destroy(t.gameObject);
             }
 
-            foreach (var discountHave in GameManager.Instance.PlayerDiscountItems)
+            for (int i = 0; i < GameManager.Instance.PlayerDiscountItems.Count; i++)
             {
-                Instantiate(couponPrefab,discountItemsContainer).SetCouponInfo(discountHave);
+                var discountHave = GameManager.Instance.PlayerDiscountItems[i];
+                Instantiate(couponPrefab,discountItemsContainer).SetDiscountInfo(ref discountHave);
             }
         }
         
