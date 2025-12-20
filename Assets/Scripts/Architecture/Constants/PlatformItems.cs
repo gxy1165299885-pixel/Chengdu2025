@@ -477,7 +477,6 @@ public static class FoodItemExtensions
 public enum DiscountType
 {
     sub = 1 << 0,//满减卷
-    //discount = 1 << 1,//折扣卷
     change = 1 << 2,//换餐卷
     free = 1 << 3,//免单卷
     Jiahao = 1 << 4,//嘉豪卷，随机修改花费值

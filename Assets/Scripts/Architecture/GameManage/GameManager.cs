@@ -12,16 +12,85 @@ namespace Architecture
         
         public int dayCount = 0;
         
-        public int PlayerHungry = 15;
+        private int _hungryToDeath = 0;
+        public int HungryToDeath
+        {
+            get => _hungryToDeath;
+            set
+            {
+                _hungryToDeath = value;
+                if (_hungryToDeath >= 3)
+                {
+                    Debug.Log("玩家因饥饿过度死亡");
+                    EventsManager.Instance.EventTrigger(Constants.PlayerDeadEvent);
+                }
+            }
+        }
+        
+        private bool _isDying = false;
+        
+        private int _playerHungry = MaxPlayerHungry;
+
+        public int PlayerHungry
+        {
+            get => _playerHungry;
+            set
+            {
+                if (value>0)
+                {
+                    _playerHungry = Mathf.Min(value,MaxPlayerHungry);
+                    _isDying = false;
+                }
+                else
+                {
+                    _playerHungry = 0;
+                    _isDying = true;
+                }
+                Debug.Log("玩家饥饿值变更为: " + _playerHungry);
+                EventsManager.Instance.EventTrigger(Constants.HungryUIRefreshEvent);
+            }
+        }
+        
         public const int MaxPlayerHungry = 15;
         
-        public int PlayerHealth = 10;
+        private int _playerHealth = MaxPlayerHealth;
+
+        public int PlayerHealth
+        {
+            get => _playerHealth;
+            set
+            {
+                if (value > 0)
+                {
+                    _playerHealth = Mathf.Min(value,MaxPlayerHealth);
+                    Debug.Log("玩家生命值变更为: " + _playerHealth);
+                    EventsManager.Instance.EventTrigger(Constants.HealthUIRefreshEvent);
+                }
+                else
+                {
+                    _playerHealth = 0;
+                    Debug.Log("玩家生命值变更为: " + _playerHealth);
+                    EventsManager.Instance.EventTrigger(Constants.HealthUIRefreshEvent);
+                    Debug.Log("玩家生命值为0死亡");
+                    EventsManager.Instance.EventTrigger(Constants.PlayerDeadEvent);
+                }
+            }
+        }
         public const int MaxPlayerHealth = 10;
         
         public int PlayerHappy = 10;
         
-        public int PlayerMoney = 10;
-        
+        private int _playerMoney = 240;
+        public int PlayerMoney {
+            get => _playerMoney;
+            set
+            {
+                _playerMoney = value;
+                Debug.Log("玩家金钱变更为: " + _playerMoney);
+                EventsManager.Instance.EventTrigger(Constants.MoneyUIRefreshEvent);
+            }
+        }
+
         public List<FoodItem> ShoppingCartItems = new ();
         
         public List<DiscountItem> PlayerDiscountItems = new()
@@ -32,9 +101,8 @@ namespace Architecture
         public List<DiscountItem> UsingDiscountItems = new ();
 
         public List<FoodItem> PlayerAteItems = new();
-
-        [YarnCommand("DisplayMainScene")]
-        public static void DisplayMainScene()
+        
+        public void DisplayMainScene()
         {
             GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);
             GameManager.Instance.StartGame();
@@ -57,8 +125,19 @@ namespace Architecture
             foreach (var foodItem in foodItems)
             {
                 var item = new FoodItem(foodItem);
+                
                 PlayerHungry += item.Hungry;
+                if (PlayerHungry > MaxPlayerHungry)
+                {
+                    PlayerHungry = MaxPlayerHungry;
+                }
+                
                 PlayerHealth += item.Health;
+                if (PlayerHealth > MaxPlayerHealth)
+                {
+                    PlayerHealth = MaxPlayerHealth;
+                }
+                
                 PlayerAteItems.Add(item);
             }
         }
@@ -66,17 +145,32 @@ namespace Architecture
         public void StartDay()
         {
             dayCount += 1;
-            EventsManager.Instance.EventTrigger(Constants.DayStartEvent, dayCount);
+            EventsManager.Instance.EventTrigger<int>(Constants.DayStartEvent, dayCount);
         }
 
         public void EndDay()
         {
-            EventsManager.Instance.EventTrigger(Constants.DayEndEvent, dayCount);
+            Instance.PlayerHungry -= 10;
+            
+            EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, dayCount);
 
             if (dayCount == 14)
             {
                 EventsManager.Instance.EventTrigger(Constants.GameEndEvent);
             }
+            
+            // 清空购物车和使用的优惠券
+            ShoppingCartItems.Clear();
+            UsingDiscountItems.Clear();
+
+            if (_isDying)
+            {
+                HungryToDeath++;
+                PlayerHealth -= 3;
+            }
+            
+            // 去下一天
+            StartDay();
         }
         
         public void GetCoupon(DiscountItem coupon)
@@ -92,11 +186,6 @@ namespace Architecture
         public void ClearCoupons()
         {
             PlayerDiscountItems.Clear();
-        }
-
-        public void StartStory(string nodeName)
-        {
-            
         }
         
         private void OnEnable()

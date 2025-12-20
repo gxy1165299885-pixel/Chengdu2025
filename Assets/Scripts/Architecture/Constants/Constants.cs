@@ -15,14 +15,17 @@ namespace Architecture
         //刷新血条
         public const string HealthUIRefreshEvent = "UIRefreshEvent";
         
+        //刷新饱食度
+        public const string HungryUIRefreshEvent = "HungryUIRefreshEvent";
+        
+        //刷新金钱
+        public const string MoneyUIRefreshEvent = "MoneyUIRefreshEvent";
+        
         //刷新购物车
         public const string CartUIRefreshEvent = "CartUIRefreshEvent";
         
         //商店点击进入
         public const string ShopClickedEvent = "ShopClickedEvent";
-        
-        //优惠券点击使用
-        public const string CouponUseClickedEvent = "CouponUseClickedEvent";
         
         //展示加入购物车的提示
         public const string ShowAddToCartTipEvent = "ShowAddToCartTipEvent";
