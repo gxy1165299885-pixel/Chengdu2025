@@ -50,4 +50,9 @@ public class ShowTicketUI : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
     }
+
+    public void QuitTicket()
+    {
+        Destroy(gameObject);
+    }
 }

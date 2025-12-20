@@ -32,7 +32,11 @@ public class EverydayEvent
         {
             GameManager.Instance.PlayerMoney += 40;
         }
-        ShowEvent();
+
+        if (!(day is DailyEvent.Fighting or DailyEvent.Stole))
+        {
+            ShowEvent();
+        }
         return day;
     }
 
