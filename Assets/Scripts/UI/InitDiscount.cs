@@ -23,7 +23,7 @@ public class InitDiscount : MonoBehaviour
         }
         if (GameManager.Instance.PlayerDiscountItems.Count == 0)
         {
-            Debug.Log("你还没有卷");
+            Debug.Log("你还没有券");
             return;
         }
         for(int i=0;i<GameManager.Instance.PlayerDiscountItems.Count;i++)
@@ -73,7 +73,7 @@ public class InitDiscount : MonoBehaviour
         //
         if (info.discountType == DiscountType.shier)
         {
-            ShowDialog.Instance.ShowDialogInfo("必须使用此外卖卷。");
+            ShowDialog.Instance.ShowDialogInfo("十二折券不可以取消使用。");
             return;
         }
         GameManager.Instance.PlayerDiscountItems.Add(info);
