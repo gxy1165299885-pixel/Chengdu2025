@@ -18,11 +18,7 @@ namespace Architecture
             {
                 if(_instance == null)
                 {
-                    GameObject obj = new GameObject(typeof(T).ToString());
-                    _instance =  obj.AddComponent<T>();
-#if DEBUG_VERSION
-                Debug.Log($"Create obj {obj.name}");
-#endif
+                    Debug.LogError("SingletonMono: " + typeof(T) + " is null!");
                 }
                 return _instance;
             }

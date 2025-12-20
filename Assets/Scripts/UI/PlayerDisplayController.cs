@@ -11,24 +11,24 @@ namespace UI
     /// </summary>
     public class PlayerDisplayController : MonoBehaviour
     {
-        [SerializeField] private Image hungryBar;
+        [SerializeField] private TextMeshProUGUI hungryText;
         [SerializeField] private TextMeshProUGUI moneyText;
 
         private void OnEnable()
         {
-            EventsManager.Instance.AddEventsListener(Constants.HungryUIRefreshEvent, SetHungryBar);
+            EventsManager.Instance.AddEventsListener(Constants.HungryUIRefreshEvent, SetHungryText);
             EventsManager.Instance.AddEventsListener(Constants.MoneyUIRefreshEvent,SetMoneyText);
         }
         
         private void OnDisable()
         {
-            EventsManager.Instance.RemoveListener(Constants.HungryUIRefreshEvent, SetHungryBar);
+            EventsManager.Instance.RemoveListener(Constants.HungryUIRefreshEvent, SetHungryText);
             EventsManager.Instance.RemoveListener(Constants.MoneyUIRefreshEvent,SetMoneyText);
         }
 
-        private void SetHungryBar()
+        private void SetHungryText()
         {
-            hungryBar.fillAmount = (float)GameManager.Instance.PlayerHungry/GameManager.MaxPlayerHungry;
+            hungryText.text = GameManager.Instance.PlayerHungry + "/" + GameManager.MaxPlayerHungry;
         }
         
         private void SetMoneyText()

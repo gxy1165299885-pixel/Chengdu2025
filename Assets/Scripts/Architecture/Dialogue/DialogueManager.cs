@@ -151,5 +151,13 @@ namespace Architecture.Dialogue
                 return NormalTalk[index];
             }
         }
+
+        private void OnDestroy()
+        {
+            EventsManager.Instance.RemoveListener<int>(Constants.DayStartEvent, OnDayStart);   
+            EventsManager.Instance.RemoveListener<int>(Constants.DayEndEvent, OnDayEnd);
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+        }
     }
 }

@@ -25,7 +25,14 @@ namespace UI
                     RemoveRandomKInPlace(GameManager.Instance.PlayerDiscountItems, 3);
                     // 增加一张随机优惠券
                     var newCoupon = GetRandomDiscountItem();
-                    GameManager.Instance.PlayerDiscountItems.Add(newCoupon);
+                    if (newCoupon.discountType == DiscountType.shier)
+                    {
+                        GameManager.Instance.UsingDiscountItems.Add(newCoupon);
+                    }
+                    else
+                    {
+                        GameManager.Instance.PlayerDiscountItems.Add(newCoupon);
+                    }
                     Debug.Log("成功兑换到优惠券: " + newCoupon.GetDisplayName());
                     ShowDialog.Instance.ShowDialogInfo("失去3张券，成功兑换到新优惠券: " + newCoupon.GetDisplayName());
                     GameManager.Instance.haveExchangeTimeThisDay = false;

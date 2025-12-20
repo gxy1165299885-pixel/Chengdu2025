@@ -53,6 +53,7 @@ public class ShowTicketUI : MonoBehaviour
 
     public void QuitTicket()
     {
+        GameManager.Instance.EndDay();
         Destroy(gameObject);
     }
 }
