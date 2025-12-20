@@ -9,15 +9,26 @@ namespace UI
     /// <summary>
     /// 挂在购物车，负责显示购物车内的物品及总价
     /// </summary>
+    [RequireComponent(typeof(CanvasGroup))]
     public class CartController : MonoBehaviour
     {
         [SerializeField] private RectTransform cartItemsContainer;
-        [SerializeField] private FoodDisplayController cartItemPrefab;
+        [SerializeField] private FoodDisplay cartItemPrefab;
         [SerializeField] private TextMeshProUGUI cartTotalPrice;
+        
+        private CanvasGroup _canvasGroup;
+
+        private void Awake()
+        {
+            _canvasGroup = GetComponent<CanvasGroup>();
+        }
 
         private void OnEnable()
         {
             EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
+            _canvasGroup.alpha = 0;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         private void OnDisable()
@@ -44,6 +55,20 @@ namespace UI
             }
             
             cartTotalPrice.text = $"Total: {totalPrice:F2}¥";
+        }
+        
+        public void ShowCart()
+        {
+            _canvasGroup.alpha = 1;
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
+        }
+        
+        public void HideCart()
+        {
+            _canvasGroup.alpha = 0;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
     }
 }

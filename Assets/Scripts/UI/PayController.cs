@@ -17,6 +17,7 @@ namespace UI
         {
             useDiscountItems.Clear();
             EventsManager.Instance.AddEventsListener<DiscountItem>(Constants.CouponUseClickedEvent, AddUseDiscount);
+            OpenPayDiscountPage();
         }
 
         private void OnDisable()
@@ -31,7 +32,6 @@ namespace UI
 
         public void OpenPayDiscountPage()
         {
-            payDiscountPage.SetActive(true);
             useDiscountItems.Clear();
             foreach (Transform t in discountItemsContainer)
             {
