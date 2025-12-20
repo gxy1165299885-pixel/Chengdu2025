@@ -15,6 +15,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI foodNameText;
         [SerializeField] private TextMeshProUGUI foodDescriptionText;
         [SerializeField] private TextMeshProUGUI foodPriceText;
+        [SerializeField] private TextMeshProUGUI foodHungryText;
         
         private FoodItem _foodRef;
         
@@ -25,6 +26,7 @@ namespace UI
             foodNameText.text = food.FoodName;
             foodDescriptionText.text = food.FoodDescription;
             foodPriceText.text = $"{food.FoodPrice:F2}¥";
+            foodHungryText.text = $"饱食度+{food.Hungry}";
         }
         
         public void AddShoppingCart()
