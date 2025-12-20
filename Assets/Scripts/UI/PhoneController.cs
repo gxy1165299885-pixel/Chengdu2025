@@ -9,6 +9,7 @@ namespace UI
     {
         [SerializeField] private GameObject inShopPage;
         [SerializeField] private GameObject outShopPage;
+        [SerializeField] private GameObject payPage;
         [SerializeField] private GameObject superCouponPage;
         [SerializeField] private GameObject myPage;
 
@@ -21,6 +22,7 @@ namespace UI
         {
             inShopPage.SetActive(true);
             outShopPage.SetActive(false);
+            payPage.SetActive(false);
             superCouponPage.SetActive(false);
             myPage.SetActive(false);
 
@@ -43,6 +45,16 @@ namespace UI
         {
             inShopPage.SetActive(false);
             outShopPage.SetActive(true);
+            payPage.SetActive(false);
+            superCouponPage.SetActive(false);
+            myPage.SetActive(false);
+        }
+        
+        public void OpenPayPage()
+        {
+            inShopPage.SetActive(false);
+            outShopPage.SetActive(false);
+            payPage.SetActive(true);
             superCouponPage.SetActive(false);
             myPage.SetActive(false);
         }
@@ -51,6 +63,7 @@ namespace UI
         {
             inShopPage.SetActive(false);
             outShopPage.SetActive(false);
+            payPage.SetActive(false);
             superCouponPage.SetActive(true);
             myPage.SetActive(false);
         }
@@ -59,6 +72,7 @@ namespace UI
         {
             inShopPage.SetActive(false);
             outShopPage.SetActive(false);
+            payPage.SetActive(false);
             superCouponPage.SetActive(false);
             myPage.SetActive(true);
         }

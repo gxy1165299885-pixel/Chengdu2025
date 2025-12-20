@@ -41,8 +41,11 @@ namespace Architecture
         {
             //开始游戏时会+1天
             dayCount = 0;
-            PlayerHealth = 100;
-            EventsManager.Instance.EventClear();
+            PlayerHealth = MaxPlayerHealth;
+            PlayerHungry = MaxPlayerHungry;
+            PlayerHappy = 0;
+            PlayerMoney = 200;
+ 
             EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
             
             StartDay();
@@ -89,5 +92,7 @@ namespace Architecture
         {
             PlayerDiscountItems.Clear();
         }
+        
+        //public void Start
     }
 }
