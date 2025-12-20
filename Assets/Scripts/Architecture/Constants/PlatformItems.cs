@@ -264,7 +264,7 @@ public class PlatformItems
     
 }
 
-public class DiscountItem
+public struct DiscountItem
 {
     //卷的类型
     public DiscountType discountType;
@@ -278,7 +278,7 @@ public class DiscountItem
 /// <summary>
 /// 商铺数据
 /// </summary>
-public class ShopperItem
+public struct ShopperItem
 {
     //商铺名
     public string Name;

@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using UI;
 using UnityEngine;
+using Yarn.Unity;
 
 namespace Architecture
 {
     public class GameManager : SingletonMono<GameManager>
     {
+        [SerializeField] private Canvas mainGameCanvas;
+        [SerializeField] private GameObject Story;
+        
         public int dayCount = 0;
         
         public int PlayerHungry = 15;
@@ -23,18 +28,13 @@ namespace Architecture
         public List<DiscountItem> PlayerDiscountItems = new ();
 
         public List<FoodItem> PlayerAteItems = new();
-        
-        
 
-        protected override void Awake()
+        [YarnCommand("DisplayMainScene")]
+        public static void DisplayMainScene()
         {
-            base.Awake();
-            DisplayMainScene();
-        }
-
-        public void DisplayMainScene()
-        {
-            // TODO
+            GameManager.Instance.Story.SetActive(false);
+            GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);
+            GameManager.Instance.StartGame();
         }
 
         public void StartGame()
@@ -45,8 +45,6 @@ namespace Architecture
             PlayerHungry = MaxPlayerHungry;
             PlayerHappy = 0;
             PlayerMoney = 200;
- 
-            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
             
             StartDay();
         }
@@ -92,7 +90,23 @@ namespace Architecture
         {
             PlayerDiscountItems.Clear();
         }
+
+        public void StartStory(string nodeName)
+        {
+            mainGameCanvas.gameObject.SetActive(false);
+            Story.SetActive(true);
+            var storyController = Story.GetComponent<StoryController>();
+            storyController.StartStory(nodeName);
+        }
         
-        //public void Start
+        private void OnEnable()
+        {
+            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.Instance.RemoveListener<List<FoodItem>>(Constants.PlayerEatEvent, OnPlayerEat);
+        }
     }
 }

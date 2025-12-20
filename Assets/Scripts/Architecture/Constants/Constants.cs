@@ -21,6 +21,15 @@ namespace Architecture
         //商店点击进入
         public const string ShopClickedEvent = "ShopClickedEvent";
         
+        //优惠券点击使用
+        public const string CouponUseClickedEvent = "CouponUseClickedEvent";
+        
+
+        #endregion
+
+        #region 故事节点
+
+        public const string StoryStart = "StoryStart";
 
         #endregion
 

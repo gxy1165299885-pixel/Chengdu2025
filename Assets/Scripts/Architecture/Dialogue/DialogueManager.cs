@@ -1,23 +1,32 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using Yarn.Unity;
 using Random = UnityEngine.Random;
 
 namespace Architecture.Dialogue
 {
+    /// <summary>
+    /// 游戏内角色自言自语
+    /// </summary>
     public class DialogueManager : SingletonMono<DialogueManager>
     {
-        [SerializeField] private DialogueRunner dialogueRunner;
+        [SerializeField] private TextMeshProUGUI dialogueText;
 
         private CancellationTokenSource _cancellationTokenSource;
 
-        protected override void Awake()
+        private void OnEnable()
         {
-            base.Awake();
             EventsManager.Instance.AddEventsListener(Constants.DayStartEvent, OnDayStart);   
             EventsManager.Instance.AddEventsListener(Constants.DayEndEvent, OnDayEnd);
+        }
+        
+        private void OnDisable()
+        {
+            EventsManager.Instance.RemoveListener(Constants.DayStartEvent, OnDayStart);   
+            EventsManager.Instance.RemoveListener(Constants.DayEndEvent, OnDayEnd);
         }
 
         private void OnDayStart()
@@ -36,7 +45,9 @@ namespace Architecture.Dialogue
             {
                 while (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    //dialogueRunner.StartDialogue();
+                    var talk = GetRandomDialogue();
+                    dialogueText.text = talk;
+                    dialogueText.TypeText(talk, 3f);
                     await Task.Delay(Random.Range(12000, 18000), _cancellationTokenSource.Token);
                 }
             }
@@ -44,6 +55,24 @@ namespace Architecture.Dialogue
             {
                 // ignored
             }
+        }
+        private string GetRandomDialogue()
+        {
+            string[] dialogues =
+            {
+                "What a beautiful day!",
+                "I wonder what's for lunch.",
+                "I should really start exercising more.",
+                "Did I leave the stove on?",
+                "I love the sound of rain.",
+                "Time flies when you're having fun.",
+                "I need to call my mom.",
+                "This book is really interesting.",
+                "I should learn to play an instrument.",
+                "Traveling is so exciting!"
+            };
+            int index = Random.Range(0, dialogues.Length);
+            return dialogues[index];
         }
     }
 }

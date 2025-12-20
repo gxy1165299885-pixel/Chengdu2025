@@ -13,9 +13,14 @@ namespace UI
         [SerializeField] private GameObject superCouponPage;
         [SerializeField] private GameObject myPage;
 
-        private void Awake()
+        private void OnEnable()
         {
             EventsManager.Instance.AddEventsListener<ShopperItem>(Constants.ShopClickedEvent, OpenInShopPage);
+        }
+        
+        private void OnDisable()
+        {
+            EventsManager.Instance.RemoveListener<ShopperItem>(Constants.ShopClickedEvent, OpenInShopPage);
         }
 
         public void OpenInShopPage(ShopperItem item)
@@ -25,11 +30,6 @@ namespace UI
             payPage.SetActive(false);
             superCouponPage.SetActive(false);
             myPage.SetActive(false);
-
-            if (item == null)
-            {
-                return;
-            }
 
             var foods = new List<FoodItem>();
             foreach (var foodItem in item.GetFoodItems())
