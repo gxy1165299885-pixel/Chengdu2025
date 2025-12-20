@@ -385,13 +385,9 @@ public static class DiscountItemExtensions
         {
             return "嘉豪券";
         }
-        else if(discountItem.discountType == DiscountType.shier)
+        else 
         {
             return "十二折券";
-        }
-        else
-        {
-            return "";
         }
     }
 }
@@ -501,9 +497,9 @@ public static class FoodItemExtensions
 [Flags]
 public enum DiscountType
 {
-    sub = 1 << 0,//满减卷
-    change = 1 << 2,//换餐卷
-    free = 1 << 3,//免单卷
-    Jiahao = 1 << 4,//嘉豪卷，随机修改花费值
-    shier = 1 << 5,//十二折卷
+    sub ,//满减卷
+    change,//换餐卷
+    free ,//免单卷
+    Jiahao,//嘉豪卷，随机修改花费值
+    shier//十二折卷
 } 
