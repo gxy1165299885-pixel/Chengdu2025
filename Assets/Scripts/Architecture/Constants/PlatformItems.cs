@@ -311,6 +311,29 @@ public class DiscountItem//:ICoupon
 
 public static class DiscountItemExtensions
 {
+    public static string GetDescription(this DiscountItem item)
+    {
+        if(item.discountType == DiscountType.change)
+        {
+            return "将购物车中随机的一份餐换成随机的另一份。";
+        }
+        else if(item.discountType == DiscountType.free)
+        {
+            return "结算时减去购物车中随机一份餐的价格。";
+        }
+        else if(item.discountType == DiscountType.Jiahao)
+        {
+            return "结算的总价格会被黑客修改为原价80%~120%";
+        }
+        else if(item.discountType == DiscountType.shier)
+        {
+            return "结算时总价格为原价的120%。强制使用。";
+        }
+        else
+        {
+            return "";
+        }
+    }
     public static string GetDisplayName(this DiscountItem discountItem)
     {
         if (discountItem.discountType == DiscountType.sub)
@@ -336,6 +359,10 @@ public static class DiscountItemExtensions
         else if(discountItem.discountType == DiscountType.Jiahao)
         {
             return "嘉豪卷";
+        }
+        else if(discountItem.discountType == DiscountType.shier)
+        {
+            return "十二折卷";
         }
         else
         {
