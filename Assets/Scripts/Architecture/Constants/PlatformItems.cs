@@ -304,6 +304,8 @@ public class DiscountItem//:ICoupon
     public int startToUse;
     //卷是否已经膨胀过
     public bool isBomb;
+    //卷的过期时间
+    public int expireTime;
 }
 /// <summary>
 /// 商铺数据
