@@ -258,7 +258,7 @@ public class PlatformItems
         var spend = 0;
         foreach (var foodItem in food)
         {
-            spend = foodItem.FoodPrice;
+            spend += foodItem.FoodPrice;
         }
         if (items != null)
         {

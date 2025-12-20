@@ -29,6 +29,7 @@ namespace UI
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            RefreshCartItems(GameManager.Instance.ShoppingCartItems);
         }
 
         private void OnDisable()

@@ -31,6 +31,7 @@ namespace UI
                 var displayObj = Instantiate(discountDisplayPrefab, contentTransform);
                 var displayComponent = displayObj.GetComponent<DiscountDisplay>();
                 displayComponent.SetDiscountInfo(ref discount);
+                displayComponent.HideUseButton();
             }
         }
     }

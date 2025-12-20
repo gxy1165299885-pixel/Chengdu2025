@@ -32,7 +32,7 @@ namespace Architecture
         
         private bool _isDying = false;
         
-        private int _playerHungry = MaxPlayerHungry;
+        private int _playerHungry = MaxPlayerHungry - 8;
 
         public int PlayerHungry
         {
@@ -53,7 +53,7 @@ namespace Architecture
             }
         }
         
-        public const int MaxPlayerHungry = 15;
+        public const int MaxPlayerHungry = 20;
         
         private int _playerHealth = MaxPlayerHealth;
 
