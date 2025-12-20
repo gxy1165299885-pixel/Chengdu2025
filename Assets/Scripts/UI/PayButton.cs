@@ -18,6 +18,13 @@ namespace UI
             }
             else
             {
+                if (GameManager.Instance.todayStolen)
+                {
+                    GameManager.Instance.ShoppingCartItems.Clear();
+                    GameManager.Instance.UsingDiscountItems.Clear();
+                    //TODO:显示被偷吃的对话框
+                    return;
+                }
                 GameManager.Instance.EndDay();
             }
         }

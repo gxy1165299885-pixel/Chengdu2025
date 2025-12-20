@@ -16,6 +16,9 @@ namespace Architecture
         public bool haveExchangeTimeThisDay = false;
         public int gachaTimesThisDay = 0;
         
+        public bool todayFighting = false;
+        public bool todayStolen = false;
+        
         private int _hungryToDeath = 0;
         public int HungryToDeath
         {
@@ -122,6 +125,11 @@ namespace Architecture
 
         private void OnPlayerEat(List<FoodItem> foodItems)
         {
+            if (todayFighting || todayStolen)
+            {
+                return;
+            }
+            
             foreach (var foodItem in foodItems)
             {
                 var item = new FoodItem(foodItem);
@@ -149,6 +157,19 @@ namespace Architecture
             haveFreeCouponThisDay = true;
             haveExchangeTimeThisDay = true;
             gachaTimesThisDay = 0;
+
+            todayFighting = false;
+            todayStolen = false;
+            var today = EverydayEvent.GetEverydayEvent();
+            if (today == DailyEvent.Fighting)
+            {
+                todayFighting = true;
+            }
+
+            if (today == DailyEvent.Stole)
+            {
+                todayStolen = true;
+            }
         }
 
         public void EndDay()
