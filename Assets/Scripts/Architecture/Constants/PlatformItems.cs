@@ -981,8 +981,9 @@ public class PlatformItems
         spend += send;
         BuyFoods = new List<FoodItem>();
         spendd = 0;
-        if (money >= spend)
+        if (money >= spend||spend<=0)
         {
+            spend = Mathf.Max(0, spend);
             money -= spend;
             GameManager.Instance.PlayerMoney = money;
             //Buyed.Add(food);
