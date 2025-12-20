@@ -25,7 +25,11 @@ namespace Architecture
         
         public List<FoodItem> ShoppingCartItems = new ();
         
-        public List<DiscountItem> PlayerDiscountItems = new ();
+        public List<DiscountItem> PlayerDiscountItems = new List<DiscountItem>
+        {
+            new DiscountItem(),
+            new DiscountItem()
+        };
         public List<DiscountItem> UsingDiscountItems = new ();
 
         public List<FoodItem> PlayerAteItems = new();
