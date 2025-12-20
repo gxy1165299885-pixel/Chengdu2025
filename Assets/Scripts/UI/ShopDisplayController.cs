@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// 显示外卖店家
+    /// </summary>
     public class ShopDisplayController : MonoBehaviour,IPointerClickHandler
     {
         [SerializeField] private Image icon;

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// 挂在菜品上，负责显示菜品信息及添加/删除购物车功能
+    /// </summary>
     public class FoodDisplayController : MonoBehaviour
     {
         [SerializeField] private Image foodIcon;

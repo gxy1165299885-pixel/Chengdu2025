@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// 挂在购物车，负责显示购物车内的物品及总价
+    /// </summary>
     public class CartController : MonoBehaviour
     {
         [SerializeField] private RectTransform cartItemsContainer;
@@ -22,6 +25,9 @@ namespace UI
             EventsManager.Instance.RemoveListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
         }
 
+        /// <summary>
+        /// 监听事件CartUIRefreshEvent，刷新购物车内的物品显示及总价
+        /// </summary>
         public void RefreshCartItems(List<FoodItem> cartItems)
         {
             foreach (Transform child in cartItemsContainer)

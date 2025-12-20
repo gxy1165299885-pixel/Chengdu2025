@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// 开始按钮
+    /// </summary>
     public class StartButton : MonoBehaviour
     {
         [SerializeField] private Canvas startMenuCanvas;

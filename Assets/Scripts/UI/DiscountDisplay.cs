@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// 挂在优惠券上
+    /// 挂在优惠券上，可以复用（背包内的可膨胀）
     /// </summary>
     public class DiscountDisplay : MonoBehaviour
     {
