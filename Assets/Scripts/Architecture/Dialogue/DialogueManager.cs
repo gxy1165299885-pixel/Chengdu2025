@@ -19,22 +19,22 @@ namespace Architecture.Dialogue
 
         private void OnEnable()
         {
-            EventsManager.Instance.AddEventsListener(Constants.DayStartEvent, OnDayStart);   
-            EventsManager.Instance.AddEventsListener(Constants.DayEndEvent, OnDayEnd);
+            EventsManager.Instance.AddEventsListener<int>(Constants.DayStartEvent, OnDayStart);   
+            EventsManager.Instance.AddEventsListener<int>(Constants.DayEndEvent, OnDayEnd);
         }
         
         private void OnDisable()
         {
-            EventsManager.Instance.RemoveListener(Constants.DayStartEvent, OnDayStart);   
-            EventsManager.Instance.RemoveListener(Constants.DayEndEvent, OnDayEnd);
+            EventsManager.Instance.RemoveListener<int>(Constants.DayStartEvent, OnDayStart);   
+            EventsManager.Instance.RemoveListener<int>(Constants.DayEndEvent, OnDayEnd);
         }
 
-        private void OnDayStart()
+        private void OnDayStart(int day)
         {
             
         }
         
-        private void OnDayEnd()
+        private void OnDayEnd(int day)
         {
             
         }

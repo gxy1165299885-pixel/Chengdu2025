@@ -13,7 +13,12 @@ namespace UI
             if (PlatformItems.BuyFood(GameManager.Instance.ShoppingCartItems,
                     GameManager.Instance.UsingDiscountItems) == -1)
             {
-                // TODO: 提示余额不足
+                ShowDialog.Instance.ShowDialogInfo("余额不足！");
+            }
+            else
+            {
+                GameManager.Instance.ShoppingCartItems.Clear();
+                GameManager.Instance.EndDay();
             }
         }
     }

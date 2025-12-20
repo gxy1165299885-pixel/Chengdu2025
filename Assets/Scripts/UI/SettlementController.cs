@@ -19,11 +19,23 @@ namespace UI
             {
                 Instantiate(foodItemPrefab, foodItemsContainer).SetFoodInfo(food);
             }
+            
+            EventsManager.Instance.AddEventsListener<int>(Constants.DayEndEvent,OnDayEnd);
         }
 
         private void OnDisable()
         {
-            throw new NotImplementedException();
+            EventsManager.Instance.RemoveListener<int>(Constants.DayEndEvent,OnDayEnd);
+        }
+        
+        private void OnDayEnd(int dayEnd)
+        {
+            foreach (Transform t in foodItemsContainer)
+            {
+                Destroy(t.gameObject);
+            }
+            gameObject.SetActive(false);
+            Debug.Log("第"+dayEnd+"天结算界面关闭");
         }
     }
 }
