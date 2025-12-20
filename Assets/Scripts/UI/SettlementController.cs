@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Architecture;
 using UnityEngine;
 
@@ -11,21 +12,29 @@ namespace UI
 
         private void OnEnable()
         {
+            Refresh(new List<FoodItem>());
+
+            EventsManager.Instance.AddEventsListener<int>(Constants.DayEndEvent,OnDayEnd);
+            EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.CartUIRefreshEvent,Refresh);
+        }
+
+        private void Refresh(List<FoodItem> _)
+        {
             foreach (Transform t in foodItemsContainer)
             {
                 Destroy(t.gameObject);
             }
+
             foreach (var food in GameManager.Instance.ShoppingCartItems)
             {
                 Instantiate(foodItemPrefab, foodItemsContainer).SetFoodInfo(food);
             }
-            
-            EventsManager.Instance.AddEventsListener<int>(Constants.DayEndEvent,OnDayEnd);
         }
 
         private void OnDisable()
         {
             EventsManager.Instance.RemoveListener<int>(Constants.DayEndEvent,OnDayEnd);
+            EventsManager.Instance.RemoveListener<List<FoodItem>>(Constants.CartUIRefreshEvent,Refresh);
         }
         
         private void OnDayEnd(int dayEnd)

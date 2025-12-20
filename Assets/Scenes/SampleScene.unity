@@ -729,7 +729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainGameCanvas: {fileID: 1864265416}
-  dayCount: 0
   haveFreeCouponThisDay: 0
   haveExchangeTimeThisDay: 0
   gachaTimesThisDay: 0
@@ -11586,7 +11585,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 721333691}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1772969083}
