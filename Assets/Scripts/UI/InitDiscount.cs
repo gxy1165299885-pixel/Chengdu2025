@@ -31,7 +31,7 @@ public class InitDiscount : MonoBehaviour
             var obj = Resources.Load<GameObject>("Prefab/券");
             obj = Instantiate(obj,gameObject.transform);
             var o = GameManager.Instance.PlayerDiscountItems[i];
-            //obj.GetComponent<DiscountDisplay>().SetDiscountInfo(ref o);
+            obj.GetComponent<DiscountDisplay>().SetDiscountInfo(ref o);
             var btn = obj.transform.Find("使用神券按钮").GetComponent<Button>();
             btn.gameObject.SetActive(true);
             btn.onClick.RemoveAllListeners();
