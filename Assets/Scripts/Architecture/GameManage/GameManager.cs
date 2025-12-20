@@ -93,11 +93,6 @@ namespace Architecture
         {
             PlayerDiscountItems.Clear();
         }
-
-        public void StartStory(string nodeName)
-        {
-            
-        }
         
         private void OnEnable()
         {
