@@ -297,15 +297,50 @@ public class PlatformItems
 public class DiscountItem//:ICoupon
 {
     //卷的类型
-    public DiscountType discountType;
+    public DiscountType discountType = DiscountType.sub;
     //折扣值，满减时为金额，折扣时为折扣率
-    public int discountValue;
+    public int discountValue = 10;
     //起用点，只有在达到这个价格时才可以用卷
-    public int startToUse;
+    public int startToUse = 20;
     //卷是否已经膨胀过
-    public bool isBomb;
+    public bool isBomb = false;
     //卷的过期时间
-    public int expireTime;
+    public int expireTime = 15;
+}
+
+public static class DiscountItemExtensions
+{
+    public static string GetDisplayName(this DiscountItem discountItem)
+    {
+        if (discountItem.discountType == DiscountType.sub)
+        {
+            if (discountItem.startToUse > 0)
+            {
+                return $"满{discountItem.startToUse}\n减{discountItem.discountValue}卷";
+            }
+            else
+            {
+                return $"立减\n{discountItem.discountValue}元卷";
+            }
+            
+        }
+        else if(discountItem.discountType == DiscountType.change)
+        {
+            return "换餐卷";
+        }
+        else if(discountItem.discountType == DiscountType.free)
+        {
+            return "免单卷";
+        }
+        else if(discountItem.discountType == DiscountType.Jiahao)
+        {
+            return "嘉豪卷";
+        }
+        else
+        {
+            return "";
+        }
+    }
 }
 /// <summary>
 /// 商铺数据
