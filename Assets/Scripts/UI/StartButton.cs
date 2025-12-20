@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Architecture;
+using UnityEngine;
 
 namespace UI
 {
@@ -10,7 +11,7 @@ namespace UI
         public void OnStartButtonClicked()
         {
             startMenuCanvas.gameObject.SetActive(false);
-            mainGameCanvas.gameObject.SetActive(true);
+            GameManager.Instance.StartStory(Constants.StoryStart);
         }
     }
 }

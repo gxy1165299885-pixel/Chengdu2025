@@ -9,17 +9,19 @@ namespace UI
     {
         [SerializeField] private Image healthBar;
 
-        private void Awake()
+        private void OnEnable()
         {
-            EventsManager.Instance.AddEventsListener(Constants.HealthUIRefreshEvent, () =>
-            {
-                SetHealthBar((float)GameManager.Instance.PlayerHealth/GameManager.MaxPlayerHealth);
-            });
+            EventsManager.Instance.AddEventsListener(Constants.HealthUIRefreshEvent, SetHealthBar);
+        }
+        
+        private void OnDisable()
+        {
+            EventsManager.Instance.RemoveListener(Constants.HealthUIRefreshEvent, SetHealthBar);
         }
 
-        private void SetHealthBar(float value)
+        private void SetHealthBar()
         {
-            healthBar.fillAmount = value;
+            healthBar.fillAmount = (float)GameManager.Instance.PlayerHealth/GameManager.MaxPlayerHealth;
         }
     }
 }

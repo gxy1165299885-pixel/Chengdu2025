@@ -12,9 +12,14 @@ namespace UI
         [SerializeField] private FoodDisplayController cartItemPrefab;
         [SerializeField] private TextMeshProUGUI cartTotalPrice;
 
-        private void Awake()
+        private void OnEnable()
         {
             EventsManager.Instance.AddEventsListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.Instance.RemoveListener<List<FoodItem>>(Constants.CartUIRefreshEvent, RefreshCartItems);
         }
 
         public void RefreshCartItems(List<FoodItem> cartItems)
