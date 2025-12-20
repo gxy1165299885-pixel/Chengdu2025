@@ -18,7 +18,14 @@ namespace UI
             }
             else
             {
-                GameManager.Instance.ShoppingCartItems.Clear();
+                if (GameManager.Instance.todayStolen)
+                {
+                    GameManager.Instance.ShoppingCartItems.Clear();
+                    GameManager.Instance.UsingDiscountItems.Clear();
+                    GameManager.Instance.todayStolen = false;
+                    EverydayEvent.ShowEvent();
+                    return;
+                }
                 GameManager.Instance.EndDay();
             }
         }
