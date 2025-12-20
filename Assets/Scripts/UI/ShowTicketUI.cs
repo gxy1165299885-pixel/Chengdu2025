@@ -23,7 +23,7 @@ public class ShowTicketUI : MonoBehaviour
         save = transform.Find("神卷减免金额").GetComponent<TextMeshProUGUI>();
         spend = transform.Find("实际支付").GetComponent<TextMeshProUGUI>();
         remain = transform.Find("剩余资金").GetComponent<TextMeshProUGUI>();*/
-        day.text = $"第{GameManager.Instance.dayCount}天";
+        day.text = $"第{GameManager.Instance.DayCount}天";
         var total = (from food in PlatformItems.BuyFoods select food.FoodPrice).Sum();
         cost.text = $"{total}";
         ticket.text = $"{PlatformItems.Discounts}";

@@ -43,7 +43,7 @@ public class FinalCheck
             Achievements.Add(achi);
         }
         /*戒戒你好*/
-        if (GameManager.Instance.dayCount < 14)
+        if (GameManager.Instance.DayCount < 14)
         {
             var achi = new Achievement();
             achi.AchievementName = "戒戒你好";
@@ -59,7 +59,7 @@ public class FinalCheck
             Achievements.Add(achi);
         }
         /*身体是革命的本钱*/
-        if (GameManager.Instance.PlayerMoney >= 2 && GameManager.Instance.dayCount < 14)
+        if (GameManager.Instance.PlayerMoney >= 2 && GameManager.Instance.DayCount < 14)
         {
             var achi = new Achievement();
             achi.AchievementName = "身体是革命的本钱";

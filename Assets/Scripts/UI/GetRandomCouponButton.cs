@@ -63,20 +63,21 @@ namespace UI
             new DiscountItem(){ discountType = DiscountType.shier, discountValue = 0, startToUse = 0 },
         };
 
-        private void OnEnable()
+        private void Awake()
         {
-            EventsManager.Instance.AddEventsListener<int>(Constants.DayStartEvent,RefreshGachaTimes);
+            EventsManager.Instance.AddEventsListener(Constants.DayChangedEvent,RefreshGachaTimes);
             RefreshNextPrice();
         }
 
-        private void OnDisable()
-        {
-            EventsManager.Instance.RemoveListener<int>(Constants.DayStartEvent,RefreshGachaTimes);
-        }
+        // private void OnDisable()
+        // {
+        //     EventsManager.Instance.RemoveListener(Constants.DayChangedEvent,RefreshGachaTimes);
+        // }
 
-        private void RefreshGachaTimes(int _)
+        private void RefreshGachaTimes()
         {
             _haveGachaTimes = 0;
+            RefreshNextPrice();
         }
         
         private void RefreshNextPrice()
@@ -99,7 +100,14 @@ namespace UI
             {
                 GameManager.Instance.PlayerMoney -= _nextPrice;
                 var get = GetRandomDiscountItem();
-                GameManager.Instance.PlayerDiscountItems.Add(get);
+                if (get.discountType == DiscountType.shier)
+                {
+                    GameManager.Instance.UsingDiscountItems.Add(get);
+                }
+                else
+                {
+                    GameManager.Instance.PlayerDiscountItems.Add(get);
+                }
                 ShowDialog.Instance.ShowDialogInfo("幸运获得:  " + get.GetDisplayName() + " !");
                 _haveGachaTimes++;
                 RefreshNextPrice();
