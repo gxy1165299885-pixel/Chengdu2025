@@ -47,7 +47,7 @@ public class FreshNewDiscount : MonoBehaviour
             var special = Random.Range(2, 6);
             var newItem = new DiscountItem
             {
-                discountType = (DiscountType)(1 << special),
+                discountType = (DiscountType)(special),
                 discountValue = 0,
                 expireTime = 15,
                 isBomb = false,
