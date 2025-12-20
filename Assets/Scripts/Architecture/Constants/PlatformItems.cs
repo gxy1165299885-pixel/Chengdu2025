@@ -303,10 +303,10 @@ public class PlatformItems
         {
             money -= spend;
             GameManager.Instance.PlayerMoney = money;
-            EventsManager.Instance.EventTrigger("PlayerEatEvent",food);
             //Buyed.Add(food);
-            BuyFoods = food;
+            BuyFoods = food?.ToList();
             spendd = spend;
+            EventsManager.Instance.EventTrigger("PlayerEatEvent",food);
             return spend;
         }
         else
@@ -318,6 +318,16 @@ public class PlatformItems
     public static List<FoodItem> BuyFoods = new List<FoodItem>();
     public static int Discounts = 0;
     public static int spendd = 0;
+
+    public static void ShowTicket()
+    {
+        var ticket = Resources.Load<GameObject>("Prefabs/小票结算");
+        var phone = GameObject.Find("手机界面");
+        if (phone != null)
+        {
+            UnityEngine.Object.Instantiate(ticket,phone.transform);
+        }
+    }
 }
 
 public class DiscountItem//:ICoupon
