@@ -24,6 +24,9 @@ namespace Architecture
         //优惠券点击使用
         public const string CouponUseClickedEvent = "CouponUseClickedEvent";
         
+        //展示加入购物车的提示
+        public const string ShowAddToCartTipEvent = "ShowAddToCartTipEvent";
+        
 
         #endregion
 

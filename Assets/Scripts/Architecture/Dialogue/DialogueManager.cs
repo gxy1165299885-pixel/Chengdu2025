@@ -58,7 +58,7 @@ namespace Architecture.Dialogue
         }
         private string GetRandomDialogue()
         {
-            string[] dialogues =
+            string[] NormalTalk =
             {
                 "What a beautiful day!",
                 "I wonder what's for lunch.",
@@ -71,8 +71,10 @@ namespace Architecture.Dialogue
                 "I should learn to play an instrument.",
                 "Traveling is so exciting!"
             };
-            int index = Random.Range(0, dialogues.Length);
-            return dialogues[index];
+            
+            // TODO 根据游戏进度添加更多对话类型
+            int index = Random.Range(0, NormalTalk.Length);
+            return NormalTalk[index];
         }
     }
 }

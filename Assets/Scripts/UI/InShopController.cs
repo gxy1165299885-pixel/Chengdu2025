@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Architecture;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,8 @@ namespace UI
         [SerializeField] private TextMeshProUGUI shopNameText;
         [SerializeField] private TextMeshProUGUI shopDescriptionText;
         [SerializeField] private RectTransform foodItemsContainer;
-        [SerializeField] private FoodDisplayController foodItemPrefab;
+        [SerializeField] private FoodDisplay foodItemPrefab;
+        [SerializeField] private AddToCartTip addToCartTipPrefab;
         
         public void SetShopInfo(Sprite shopIcon, string shopName, string shopDescription,List<FoodItem> foods)
         {
@@ -32,6 +34,16 @@ namespace UI
             {
                 Instantiate(foodItemPrefab, foodItemsContainer).SetFoodInfo(food);
             }
+        }
+
+        private void OnEnable()
+        {
+            EventsManager.Instance.AddEventsListener(Constants.ShowAddToCartTipEvent,ShowAddToCartTip);
+        }
+
+        public void ShowAddToCartTip()
+        {
+            Instantiate(addToCartTipPrefab, transform).ShowTip();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace UI
     /// <summary>
     /// 挂在菜品上，负责显示菜品信息及添加/删除购物车功能
     /// </summary>
-    public class FoodDisplayController : MonoBehaviour
+    public class FoodDisplay : MonoBehaviour
     {
         [SerializeField] private Image foodIcon;
         [SerializeField] private TextMeshProUGUI foodNameText;
@@ -24,7 +24,7 @@ namespace UI
             foodIcon.sprite = ResourceManager.Instance.Load<Sprite>(food.FoodIconName);
             foodNameText.text = food.FoodName;
             foodDescriptionText.text = food.FoodDescription;
-            foodPriceText.text = $"Total: {food.FoodPrice:F2}¥";
+            foodPriceText.text = $"{food.FoodPrice:F2}¥";
         }
         
         public void AddShoppingCart()
@@ -32,6 +32,7 @@ namespace UI
             GameManager.Instance.ShoppingCartItems.Add(_foodRef);
             EventsManager.Instance.EventTrigger<List<FoodItem>>(Constants.CartUIRefreshEvent,
                 GameManager.Instance.ShoppingCartItems);
+            EventsManager.Instance.EventTrigger(Constants.ShowAddToCartTipEvent);
         }
         
         public void DeleteFromShoppingCart()
