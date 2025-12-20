@@ -22,7 +22,8 @@ namespace UI
                 {
                     GameManager.Instance.ShoppingCartItems.Clear();
                     GameManager.Instance.UsingDiscountItems.Clear();
-                    //TODO:显示被偷吃的对话框
+                    GameManager.Instance.todayStolen = false;
+                    EverydayEvent.ShowEvent();
                     return;
                 }
                 GameManager.Instance.EndDay();

@@ -125,7 +125,13 @@ namespace Architecture
 
         private void OnPlayerEat(List<FoodItem> foodItems)
         {
-            if (todayFighting || todayStolen)
+            if (todayFighting)
+            {
+                EverydayEvent.ShowEvent();
+                return;
+            }
+
+            if (todayStolen)
             {
                 return;
             }
