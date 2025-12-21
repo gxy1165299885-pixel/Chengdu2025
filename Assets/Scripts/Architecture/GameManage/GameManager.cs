@@ -132,6 +132,13 @@ namespace Architecture
         {
             var allAchievements = FinalCheck.CheckFinal();
             // TODO
+            EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, DayCount);
+        }
+        
+        public void BackMainScreen()
+        {
+            mainGameCanvas.gameObject.SetActive(false);
+            dialogueRunner.gameObject.SetActive(false);
         }
 
         public void GameLaunch()
