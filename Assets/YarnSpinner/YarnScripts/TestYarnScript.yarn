@@ -6,6 +6,24 @@ This is an example of a Yarn Spinner script. Write your dialogue here!
 title: StoryStart
 position: -31,194
 ---
-哈哈哈哈哈哈哈哈哈
+<<CharacterHappy>>
+又到了月初发生活费的时间！这个月怎么安排呢？
+<<CharacterAmaze>>
+又有gamejam了！冲！
+<<CharacterNormal>>
+机票购入！酒店定好了！
+看一眼余额。。。还行。。。
+<<CharacterSigh>>
+就剩这么一点了。。。不过勉强能活，根据行程还有半个月的吃饭钱就行。
+<<CharacterNormal>>
+。。。。。。
+<<CharacterAmaze>>
+什么！半年前定的裙子要补尾款了！没通知我啊！
+什么！一年前的谷通知要交国际运费了！
+手办出荷了也要补尾款了！
+<<CharacterDigust1>>
+余额。。。
+<<CharacterDigust2>>
+200块！半个月！我真的可以吗。。。。
 <<DisplayMainScene>>
 ===
