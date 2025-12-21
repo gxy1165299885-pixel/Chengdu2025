@@ -357,7 +357,14 @@ public class FinalCheck
             achi.AchievementDescription = "一个人也能吃出火锅的气势。";
             Achievements.Add(achi);
         }
-
+        /*奢侈一把*/
+        if ((from item in l where item.FoodName == "黄金鸡公煲" select item).Any()) // 点了游戏中最贵的菜品（黄金鸡公煲48元）
+        {
+            var achi = new Achievement();
+            achi.AchievementName = "奢侈一把";
+            achi.AchievementDescription = "偶尔也要对自己好一点。";
+            Achievements.Add(achi);
+        }
         foreach (var achi in Achievements)
         {
             Debug.Log(achi.AchievementName);
