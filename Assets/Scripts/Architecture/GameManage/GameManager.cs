@@ -131,8 +131,12 @@ namespace Architecture
         public void OnGameOver()
         {
             var allAchievements = FinalCheck.CheckFinal();
-            ResourceManager.Instance.Load<ShowFinal>("Prefab/Final").ShowFinalType(_dayCount>=14, allAchievements);
-            EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, DayCount);
+            var obj = Resources.Load<GameObject>("Prefab/Final");
+            obj = Instantiate(obj);
+            var f = obj.GetComponent<ShowFinal>();
+            f.ShowFinalType(_dayCount>=14, allAchievements);
+            //ResourceManager.Instance.Load<ShowFinal>("Prefab/Final").
+            //EventsManager.Instance.EventTrigger<int>(Constants.DayEndEvent, DayCount);
         }
         
         public void BackMainScreen()
