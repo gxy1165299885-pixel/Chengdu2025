@@ -9,6 +9,7 @@ namespace Architecture
     public class GameManager : SingletonMono<GameManager>
     {
         [SerializeField] private Canvas mainGameCanvas;
+        public DialogueRunner dialogueRunner;
         
         private int _dayCount = 0;
 
@@ -114,10 +115,17 @@ namespace Architecture
         public List<DiscountItem> UsingDiscountItems = new();
 
         public List<FoodItem> PlayerAteItems = new();
-        
+
+        public void GameLaunch()
+        {
+            dialogueRunner.gameObject.SetActive(true);
+            dialogueRunner.StartDialogue("StoryStart");
+        }
+
         [YarnCommand("DisplayMainScene")]
         public static void DisplayMainScene()
         {
+            GameManager.Instance.dialogueRunner.gameObject.SetActive(false);
             GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);
             GameManager.Instance.StartGame();
         }
