@@ -123,6 +123,11 @@ namespace Architecture
             EventsManager.Instance.AddEventsListener(Constants.GameEndEvent,OnGameOver);
         }
 
+        private void Start()
+        {
+            MusicManager.Instance.PlayBGM("Audio/GameBGM");
+        }
+
         public void OnGameOver()
         {
             var allAchievements = FinalCheck.CheckFinal();
