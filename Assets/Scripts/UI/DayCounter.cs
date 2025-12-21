@@ -13,7 +13,7 @@ namespace UI
         }
         private void RefreshDayText()
         {
-            dayText.text = "第 " + (GameManager.Instance.DayCount ) + " 天";
+            dayText.text = GameManager.Instance.DayCount.ToString();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Architecture
         private List<AudioSource> soundList = new List<AudioSource>();
         private float soundVolume = 1;
 
-        public bool soundEnabled;
+        public bool soundEnabled = true;
         public MusicManager()
         {
             MonoController.Instance.AddUpdateListener(RecycleSound);
