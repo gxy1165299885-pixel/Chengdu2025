@@ -936,6 +936,17 @@ public class PlatformItems
     /// <returns>本次消费的总额，-1为余额不足</returns>
     public static int BuyFood(List<FoodItem> food,List<DiscountItem> items = null)
     {
+        if (GameManager.Instance.DayCount <= 1)
+        {
+            BuyFoods.Clear();
+            Discounts = 0;
+            spendd = 0;
+            foodCounts.Clear();
+            DailyEvents.Clear();
+            e.Clear();
+            discountsCount.Clear();
+            baipiao = false;
+        }
         var money = GameManager.Instance.PlayerMoney;
         var spend = 0;
         var extra = 0;
@@ -981,14 +992,42 @@ public class PlatformItems
         spend += send;
         BuyFoods = new List<FoodItem>();
         spendd = 0;
-        if (money >= spend)
+        if (money >= spend||spend<=0)
         {
+            spend = Mathf.Max(0, spend);
             money -= spend;
             GameManager.Instance.PlayerMoney = money;
-            //Buyed.Add(food);
             BuyFoods = food?.ToList();
             spendd = spend;
             EventsManager.Instance.EventTrigger("PlayerEatEvent",food);
+            if (EverydayEvent.day == DailyEvent.Fighting)
+            {
+                foodCounts.Add(0);
+                discountsCount.Add(items?.Count ?? 0);
+            }
+
+            else if (EverydayEvent.day == DailyEvent.Stole)
+            {
+                if (e.ContainsKey(GameManager.Instance.DayCount))
+                {
+                    foodCounts.Add(food?.Count??0);
+                    discountsCount.Add(items?.Count ?? 0);
+                }
+                else
+                {
+                    e[GameManager.Instance.DayCount] = true;
+                }
+            }
+            else
+            {
+                foodCounts.Add(food?.Count??0);
+                discountsCount.Add(items?.Count ?? 0);
+            }
+
+            if (spend <= 0 && (food?.Count ?? 0) > 0)
+            {
+                baipiao = true;
+            }
             return spend;
         }
         else
@@ -1000,7 +1039,13 @@ public class PlatformItems
     public static List<FoodItem> BuyFoods = new List<FoodItem>();
     public static int Discounts = 0;
     public static int spendd = 0;
-
+    public static List<int> foodCounts = new List<int>();
+    public static List<DailyEvent> DailyEvents = new List<DailyEvent>();
+    private static Dictionary<int,bool> e  = new Dictionary<int,bool>();
+    public static bool baipiao = false;
+    public static List<int> discountsCount = new List<int>();
+    
+    
     public static void ShowTicket()
     {
         var ticket = Resources.Load<GameObject>("Prefab/小票结算");

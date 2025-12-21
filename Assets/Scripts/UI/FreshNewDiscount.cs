@@ -44,7 +44,7 @@ public class FreshNewDiscount : MonoBehaviour
         var ix = Random.Range(0, 1f);
         if (ix < 0.3f)
         {
-            var special = Random.Range(2, 6);
+            var special = Random.Range(1, 5);
             var newItem = new DiscountItem
             {
                 discountType = (DiscountType)(special),
@@ -54,12 +54,11 @@ public class FreshNewDiscount : MonoBehaviour
                 startToUse = 0
             };
             list.Add(newItem);
-            if (newItem.discountType == DiscountType.shier)
+            if (newItem.discountType is DiscountType.shier)
             {
                 return list;
             }
         }
-        
         for (int i = list.Count; i < 3; i++)
         {
             var newItem = new DiscountItem
