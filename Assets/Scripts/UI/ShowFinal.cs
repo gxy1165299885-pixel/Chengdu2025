@@ -10,7 +10,7 @@ public class ShowFinal : MonoBehaviour
     
     public void ShowFinalType(bool win, List<Achievement> achievements = null)
     {
-        var img = GetComponent<Image>();
+        var img = GetComponentInChildren<Image>();
         if (win)
         {
             img.sprite = result[0];
