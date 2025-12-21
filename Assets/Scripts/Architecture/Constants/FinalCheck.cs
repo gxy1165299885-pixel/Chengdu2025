@@ -51,12 +51,20 @@ public class FinalCheck
             achi.AchievementDescription = "没能活过14天";
             Achievements.Add(achi);
         }
+        /*戒戒你好*/
+        if (GameManager.Instance.DayCount < 14 && GameManager.Instance.PlayerMoney >= 0)
+        {
+            var achi = new Achievement();
+            achi.AchievementName = "钱没花完";
+            achi.AchievementDescription = "为什么不吃点好的？";
+            Achievements.Add(achi);
+        }
         /*极限*/
-        if (GameManager.Instance.PlayerMoney <= 52)
+        if (GameManager.Instance.PlayerMoney <= 10)
         {
             var achi = new Achievement();
             achi.AchievementName = "极限";
-            achi.AchievementDescription = "剩余的金额小于52";
+            achi.AchievementDescription = "剩余的金额小于10";
             Achievements.Add(achi);
         }
         /*身体是革命的本钱*/
@@ -310,8 +318,6 @@ public class FinalCheck
             achi.AchievementDescription = "公平对待每一家餐厅。";
             Achievements.Add(achi);
         }
-
-
         var jcount = 0;
         foreach (var item in PlatformItems.discountsCount)
         {
