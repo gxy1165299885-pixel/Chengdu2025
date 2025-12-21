@@ -116,6 +116,19 @@ namespace Architecture
 
         public List<FoodItem> PlayerAteItems = new();
 
+        protected override void Awake()
+        {
+            base.Awake();
+            EventsManager.Instance.AddEventsListener(Constants.PlayerDeadEvent,OnGameOver);
+            EventsManager.Instance.AddEventsListener(Constants.GameEndEvent,OnGameOver);
+        }
+
+        public void OnGameOver()
+        {
+            var allAchievements = FinalCheck.CheckFinal();
+            // TODO
+        }
+
         public void GameLaunch()
         {
             dialogueRunner.gameObject.SetActive(true);

@@ -52,11 +52,11 @@ public class FinalCheck
             Achievements.Add(achi);
         }
         /*极限*/
-        if (GameManager.Instance.PlayerMoney <= 52)
+        if (GameManager.Instance.PlayerMoney <= 25)
         {
             var achi = new Achievement();
             achi.AchievementName = "极限";
-            achi.AchievementDescription = "剩余的金额小于52";
+            achi.AchievementDescription = "剩余的金额小于25";
             Achievements.Add(achi);
         }
         /*身体是革命的本钱*/
