@@ -85,7 +85,7 @@ namespace UI
             _nextPrice = GachaPrices[Mathf.Min(_haveGachaTimes, GachaPrices.Length - 1)];
             priceText.text = "下一次的价格是 "+_nextPrice+" ¥";
             insuranceInfoText.text = _haveGachaTimes <= 4
-                ? "您已经抽过 " + _haveGachaTimes + " 次优惠券了，第五次必出特殊券哦！（仅限一次）"
+                ? "您已经抽过 " + _haveGachaTimes + " 次优惠券了，第五次必出特殊券哦！（每日仅限一次）"
                 : "您已经抽过 " + _haveGachaTimes + " 次优惠券了，祝您好运！";
         }
 

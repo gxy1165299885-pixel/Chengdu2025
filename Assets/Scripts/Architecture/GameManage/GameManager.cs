@@ -115,6 +115,7 @@ namespace Architecture
 
         public List<FoodItem> PlayerAteItems = new();
         
+        [YarnCommand("DisplayMainScene")]
         public static void DisplayMainScene()
         {
             GameManager.Instance.mainGameCanvas.gameObject.SetActive(true);

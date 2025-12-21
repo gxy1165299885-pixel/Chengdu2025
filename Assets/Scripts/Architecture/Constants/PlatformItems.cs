@@ -211,7 +211,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "白米饭",
             FoodPrice = 2,
-            Hungry = 10,
+            Hungry = 6,
             Health = -1
         },
         new FoodItem()
@@ -221,7 +221,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "窝窝头",
             FoodPrice = 2,
-            Hungry = 10,
+            Hungry = 6,
             Health = -1
         },
         new FoodItem()
@@ -231,7 +231,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "蛋炒饭",
             FoodPrice = 8,
-            Hungry = 10,
+            Hungry = 8,
             Health = 0
         },
         new FoodItem()
@@ -241,7 +241,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "蛋炒面",
             FoodPrice = 8,
-            Hungry = 10,
+            Hungry = 8,
             Health = 0
         },
         new FoodItem()
@@ -352,7 +352,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "红糖冰粉",
             FoodPrice = 8,
-            Hungry = 2,
+            Hungry = 4,
             Health = 1
         },
         // 新增菜品 - 冰雪蜜城甜蜜蜜
@@ -383,7 +383,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "珍珠奶茶",
             FoodPrice = 7,
-            Hungry = 3,
+            Hungry = 4,
             Health = -1
         },
         new FoodItem()
@@ -393,7 +393,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "棒打鲜橙",
             FoodPrice = 8,
-            Hungry = 2,
+            Hungry = 8,
             Health = 0
         },
         new FoodItem()
@@ -403,7 +403,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "草莓摇摇奶昔",
             FoodPrice = 9,
-            Hungry = 3,
+            Hungry = 6,
             Health = -1
         },
         // 新增菜品 - 沙县国际大酒店
@@ -822,8 +822,8 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "火锅泡面",
             FoodPrice = 5,
-            Hungry = 8,
-            Health = -1
+            Hungry = 10,
+            Health = -2
         },
         new FoodItem()
         {
@@ -832,7 +832,7 @@ public class PlatformItems
             FoodIconName = "Icon/dish",
             FoodName = "霸气捣柠檬",
             FoodPrice = 6,
-            Hungry = 1,
+            Hungry = 5,
             Health = 0
         },
         new FoodItem()
