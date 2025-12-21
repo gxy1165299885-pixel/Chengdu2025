@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1722787358492648824}
   - component: {fileID: 8633905550258836347}
   m_Layer: 5
-  m_Name: lable (2)
+  m_Name: "\u4F7F\u7528\u5238\u6570"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4647983757559443171}
   - component: {fileID: 4449962411213483121}
   m_Layer: 5
-  m_Name: lable (1)
+  m_Name: "\u7ED3\u4F59"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,6 +530,7 @@ MonoBehaviour:
   - {fileID: 6154761626141239666, guid: 0de62db4348320f42826d61f691af19b, type: 3}
   - {fileID: -5849803566432164910, guid: 88b99adf289927b4fbd9cf51b5912133, type: 3}
   Content: {fileID: 5401674506777871757}
+  win: 0
 --- !u!1 &3590375372405258029
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +757,7 @@ GameObject:
   - component: {fileID: 5360741687305750950}
   - component: {fileID: 3358666789974415375}
   m_Layer: 5
-  m_Name: lable (3)
+  m_Name: "\u5B58\u6D3B\u5929\u6570"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

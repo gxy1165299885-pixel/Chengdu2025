@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Architecture;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +46,10 @@ public class ShowFinal : MonoBehaviour
                 des.text = item.AchievementDescription;
             }
         }
+
+        transform.GetChild(0).Find("结余").GetComponent<TextMeshProUGUI>().text = $"结余:{GameManager.Instance.PlayerMoney}元";
+        transform.GetChild(0).Find("使用券数").GetComponent<TextMeshProUGUI>().text = $"使用{(from item in PlatformItems.discountsCount select item).Sum()}张券";
+        transform.GetChild(0).Find("存活天数").GetComponent<TextMeshProUGUI>().text = $"存活{GameManager.Instance.DayCount}天";
     }
     public void QuitGame()
     {

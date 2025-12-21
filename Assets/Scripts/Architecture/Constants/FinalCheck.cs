@@ -76,7 +76,7 @@ public class FinalCheck
             Achievements.Add(achi);
         }
         /*破产吃货*/
-        if (GameManager.Instance.PlayerMoney <= 0 && GameManager.Instance.DayCount > 14)
+        if (GameManager.Instance.PlayerMoney <= 0 && GameManager.Instance.DayCount >= 14)
         {
             var achi = new Achievement();
             achi.AchievementName = "破产吃货";
@@ -324,7 +324,7 @@ public class FinalCheck
             jcount+=item;
         }
         /*极限生存*/
-        if (jcount <=0 && GameManager.Instance.DayCount > 14) // 不使用任何优惠券，仅用200元成功存活14天
+        if (jcount <=0 && GameManager.Instance.DayCount >= 14) // 不使用任何优惠券，仅用200元成功存活14天
         {
             var achi = new Achievement();
             achi.AchievementName = "极限生存";
