@@ -139,7 +139,7 @@ public class FinalCheck
         }
 
         /*价格刺客受害者*/
-        if ((from item in l select item.FoodName.Contains("自来水")).Any()) // 购买过"长白山天然自来水"
+        if ((from item in l select item.FoodName.Contains("自来水")).Count()>0) // 购买过"长白山天然自来水"
         {
             var achi = new Achievement();
             achi.AchievementName = "价格刺客受害者";
@@ -185,7 +185,7 @@ public class FinalCheck
         
 
         /*菊花残*/
-        if ((from item in l select item.FoodName.Contains("泻")).Any()) // 因健康值过低而使用"止泻药"
+        if ((from item in l select item.FoodName.Contains("泻")).Count()>0) // 因健康值过低而使用"止泻药"
         {
             var achi = new Achievement();
             achi.AchievementName = "菊花残";
@@ -272,7 +272,7 @@ public class FinalCheck
                 select item.FoodName
             ).Distinct().Count();
         /*美食家*/
-        if (true) // 品尝过50种不同的菜品
+        if (count>50) // 品尝过50种不同的菜品
         {
             var achi = new Achievement();
             achi.AchievementName = "美食家";
