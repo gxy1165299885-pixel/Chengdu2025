@@ -1,4 +1,5 @@
-﻿using Architecture;
+﻿using System.Collections.Generic;
+using Architecture;
 using UnityEngine;
 
 namespace UI
@@ -21,6 +22,8 @@ namespace UI
                 if (GameManager.Instance.todayStolen)
                 {
                     GameManager.Instance.ShoppingCartItems.Clear();
+                    EventsManager.Instance.EventTrigger<List<FoodItem>>(Constants.CartUIRefreshEvent,
+                        GameManager.Instance.ShoppingCartItems);
                     GameManager.Instance.UsingDiscountItems.Clear();
                     GameManager.Instance.todayStolen = false;
                     EverydayEvent.ShowEvent();
